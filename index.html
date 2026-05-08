@@ -2,80 +2,77 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 魁北克 PSTQ 打分器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2026 魁省 PSTQ 精准打分系统</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); margin-bottom: 16px; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .card { @apply bg-white rounded-2xl p-5 shadow-sm border border-slate-200 mb-4 transition-all; }
+        .input-label { @apply block text-sm font-bold text-slate-700 mb-2; }
+        .select-ui { @apply w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl focus:ring-blue-600 focus:border-blue-600 block p-3 appearance-none font-medium; }
+        .section-title { @apply flex items-center mb-4 font-black text-slate-800 uppercase tracking-wider text-sm border-b pb-2; }
+        .hidden-section { display: none; }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen pb-24">
+<body class="bg-slate-100 min-h-screen pb-32">
 
-    <div class="max-w-md mx-auto p-4">
-        <!-- 头部 -->
+    <div class="max-w-md mx-auto px-4">
         <header class="py-6 text-center">
-            <h1 class="text-2xl font-bold text-blue-800">PSTQ 打分系统 (2026)</h1>
-            <p class="text-gray-500 text-sm mt-2">基于 1400 分制最新选拔准则</p>
+            <span class="inline-block px-3 py-1 bg-blue-600 text-white rounded-full text-xs font-bold mb-2 shadow-sm">PSTQ 2026 OFFICIAL</span>
+            <h1 class="text-2xl font-black text-slate-900 tracking-tight">魁北克技术移民评估</h1>
+            <p class="text-slate-500 text-xs mt-2 font-medium">根据 2026 年 4 月 MIFI 最新法案实时计算</p>
         </header>
 
-        <!-- 1. 人力资本 -->
-        <div class="card">
-            <h2 class="font-bold text-gray-700 mb-4 border-b pb-2">1. 人力资本 (Max 520)</h2>
-            
-            <label class="block text-sm font-medium text-gray-600 mb-1">您的年龄</label>
-            <select id="age" class="w-full border p-2 rounded mb-4 focus:ring-2 focus:ring-blue-500">
-                <option value="120">18 - 35 岁 (120分)</option>
-                <option value="110">36 岁 (110分)</option>
-                <option value="100">37 岁 (100分)</option>
-                <option value="0">45 岁以上 (0分)</option>
-            </select>
-
-            <label class="block text-sm font-medium text-gray-600 mb-1">法语口语等级 (听/说)</label>
-            <select id="french" class="w-full border p-2 rounded mb-4">
-                <option value="0">低于 7 级 (不符合多数门槛)</option>
-                <option value="140">7 级 (140分)</option>
-                <option value="170">8 级 (170分)</option>
-                <option value="200">9 级及以上 (200分)</option>
+        <div class="card bg-blue-50 border-blue-100">
+            <label class="input-label text-blue-800">婚姻及随行状态</label>
+            <select id="marital" class="select-ui border-blue-200 bg-white" onchange="toggleSpouse(); calculate()">
+                <option value="single">单身 / 配偶不随行</option>
+                <option value="married">已婚 / 同居配偶随行 (启用双轨计分)</option>
             </select>
         </div>
 
-        <!-- 2. 魁省劳动力需求 -->
         <div class="card">
-            <h2 class="font-bold text-gray-700 mb-4 border-b pb-2">2. 魁省需求 (Max 700)</h2>
+            <h2 class="section-title text-blue-600">1. 主申核心条件</h2>
             
-            <label class="block text-sm font-medium text-gray-600 mb-1">雇主 Offer (VJO) 所在地</label>
-            <select id="vjo" class="w-full border p-2 rounded">
-                <option value="0">无 VJO</option>
-                <option value="30">大蒙特利尔地区 (30分)</option>
-                <option value="390">大蒙特利尔以外偏远地区 (390分)</option>
-            </select>
-        </div>
-
-        <!-- 底部实时总分 -->
-        <div class="fixed bottom-0 left-0 right-0 bg-blue-900 text-white p-4 shadow-lg flex justify-between items-center">
-            <div>
-                <span class="text-sm opacity-80">预估总分</span>
-                <div class="text-2xl font-bold"><span id="total-score">0</span> / 1400</div>
+            <div class="mb-4">
+                <label class="input-label">年龄 (提交申请时)</label>
+                <select id="age" class="select-ui calc-item">
+                    <option value="120,100">20 - 30 岁 (单身120分 / 已婚100分)</option>
+                    <option value="110,90">18 - 19 岁</option>
+                    <option value="110,95">31 岁</option>
+                    <option value="100,90">32 岁</option>
+                    <option value="90,81">33 岁</option>
+                    <option value="75,68">35 岁</option>
+                    <option value="50,45">40 岁</option>
+                    <option value="0,0">45 岁以上 (0分)</option>
+                </select>
             </div>
-            <button onclick="calculate()" class="bg-blue-500 hover:bg-blue-400 px-6 py-2 rounded-full font-bold">立即计算</button>
+
+            <div class="mb-4">
+                <label class="input-label">最高学历</label>
+                <select id="edu" class="select-ui calc-item">
+                    <option value="104,88">大学本科 3-4年 (单身104 / 已婚88)</option>
+                    <option value="110,93">硕士研究生 (单身110 / 已婚93)</option>
+                    <option value="130,110">博士或医学专科 (满分)</option>
+                    <option value="52,44">大专/技术专科 1-2年</option>
+                    <option value="26,22">职业培训 DEP 900小时+</option>
+                    <option value="13,11">高中</option>
+                </select>
+            </div>
+
+            <div class="mb-2">
+                <label class="input-label">全球工作经验 (过去5年内)</label>
+                <select id="exp" class="select-ui calc-item">
+                    <option value="70,50">48个月以上 (满分)</option>
+                    <option value="50,35">36 - 47个月</option>
+                    <option value="40,30">24 - 35个月</option>
+                    <option value="20,15">12 - 23个月</option>
+                    <option value="0,0">少于12个月</option>
+                </select>
+            </div>
         </div>
-    </div>
 
-    <script>
-        function calculate() {
-            const ageScore = parseInt(document.getElementById('age').value);
-            const frenchScore = parseInt(document.getElementById('french').value);
-            const vjoScore = parseInt(document.getElementById('vjo').value);
-
-            const total = ageScore + frenchScore + vjoScore;
-            
-            // 简单动画显示分数
-            document.getElementById('total-score').innerText = total;
-
-            if (frenchScore === 0) {
-                alert("提醒：2026年新政要求法语口语通常需达到 7 级或以上。");
-            }
-        }
-    </script>
-</body>
-</html>
+        <div class="card">
+            <h2 class="section-title text-purple-600">2. 法语能力 (Niveau)</h2>
+            <p class="text-xs text-slate-500 mb-3 font
