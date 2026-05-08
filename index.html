@@ -23,7 +23,7 @@
 </head>
 <body class="bg-white min-h-screen flex flex-col no-scrollbar">
 
-    <header class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md z-50 px-6 py-4 border-b border-slate-50">
+    <header id="top-header" class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md z-50 px-6 py-4 border-b border-slate-50 shadow-sm hidden">
         <div class="max-w-md mx-auto">
             <div class="flex justify-between items-center mb-2">
                 <span id="step-name" class="text-xs font-black text-slate-400 uppercase tracking-widest">基础信息</span>
@@ -35,11 +35,33 @@
         </div>
     </header>
 
-    <main class="flex-grow pt-28 pb-32 px-6 max-w-md mx-auto w-full">
+    <main class="flex-grow pt-10 pb-10 px-6 max-w-md mx-auto w-full flex flex-col justify-center min-h-[90vh]">
         
-        <div id="step-1" class="step-container active" data-name="申请状态">
+        <div id="step-0" class="step-container active" data-name="欢迎页">
+            <div class="text-center">
+                <div class="w-20 h-20 mx-auto bg-blue-100 rounded-2xl flex items-center justify-center mb-8 shadow-inner">
+                    <span class="text-4xl">🍁</span>
+                </div>
+                <h1 class="text-3xl font-black text-slate-900 tracking-tight mb-4">PSTQ 1400分<br>智能评估系统</h1>
+                <p class="text-slate-500 font-medium mb-10 leading-relaxed">
+                    基于魁北克移民局 (MIFI) 2026年最新法案数据，为您提供最精准的移民成功率测算。
+                </p>
+                
+                <div class="space-y-3 text-sm text-slate-600 font-bold mb-12 text-left bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                    <div class="flex items-center"><span class="text-emerald-500 mr-3 text-lg">✓</span> 婚姻双轨独立算分</div>
+                    <div class="flex items-center"><span class="text-emerald-500 mr-3 text-lg">✓</span> 紧缺职业数据全覆盖</div>
+                    <div class="flex items-center"><span class="text-emerald-500 mr-3 text-lg">✓</span> 测算仅需约 1 分钟</div>
+                </div>
+
+                <button onclick="nextStep()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-[0_10px_20px_rgba(37,99,235,0.2)] active:scale-95 transition-all text-lg">
+                    立即开始评估
+                </button>
+            </div>
+        </div>
+
+        <div id="step-1" class="step-container" data-name="申请状态">
             <h2 class="question-title">首先，您的申请状态是？</h2>
-            <select id="marital" class="select-ui border-blue-200 bg-blue-50 text-blue-900">
+            <select id="marital" class="select-ui border-blue-200 bg-blue-50 text-blue-900" onchange="updateUI()">
                 <option value="single">单身 / 离婚 / 配偶不随行</option>
                 <option value="married">已婚 / 同居配偶随行</option>
             </select>
@@ -97,4 +119,259 @@
             <h2 class="question-title">您的法语听力和口语水平？</h2>
             <div class="space-y-4">
                 <div>
-                    <label
+                    <label class="input-label">听力 (CO)</label>
+                    <select id="fr_co" class="select-ui calc-item">
+                        <option value="0,0">Niveau 1-4 / 无成绩</option>
+                        <option value="38,30">Niveau 5-6</option>
+                        <option value="44,35" selected>Niveau 7-8 (B2)</option>
+                        <option value="50,40">Niveau 9-12 (C1/C2)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="input-label">口语 (PO)</label>
+                    <select id="fr_po" class="select-ui calc-item">
+                        <option value="0,0">Niveau 1-4 / 无成绩</option>
+                        <option value="38,30">Niveau 5-6</option>
+                        <option value="44,35" selected>Niveau 7-8 (B2)</option>
+                        <option value="50,40">Niveau 9-12 (C1/C2)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="step-6" class="step-container" data-name="语言能力">
+            <h2 class="question-title">您的法语阅读和写作水平？</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="input-label">阅读 (CE)</label>
+                    <select id="fr_ce" class="select-ui calc-item">
+                        <option value="0,0">Niveau 1-4 / 无成绩</option>
+                        <option value="38,30">Niveau 5-6</option>
+                        <option value="44,35">Niveau 7-8 (B2)</option>
+                        <option value="50,40">Niveau 9-12 (C1/C2)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="input-label">写作 (PE)</label>
+                    <select id="fr_pe" class="select-ui calc-item">
+                        <option value="0,0">Niveau 1-4 / 无成绩</option>
+                        <option value="38,30">Niveau 5-6</option>
+                        <option value="44,35">Niveau 7-8 (B2)</option>
+                        <option value="50,40">Niveau 9-12 (C1/C2)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="step-7" class="step-container" data-name="劳动力需求">
+            <h2 class="question-title">您的主申请职业紧缺度如何？</h2>
+            <select id="diag" class="select-ui calc-single">
+                <option value="0">无对应经验 / 不清楚</option>
+                <option value="120">【极度紧缺】且有 48个月+ 经验</option>
+                <option value="100">【极度紧缺】且有 24-35个月经验</option>
+                <option value="100">【轻度紧缺】且有 48个月+ 经验</option>
+                <option value="80">【轻度紧缺】且有 24-35个月经验</option>
+                <option value="25">【供需平衡】且有 48个月+ 经验</option>
+            </select>
+        </div>
+
+        <div id="step-8" class="step-container" data-name="劳动力需求">
+            <h2 class="question-title">是否持有魁省有效雇主信 (VJO)？</h2>
+            <select id="vjo" class="select-ui calc-single">
+                <option value="0">无 VJO</option>
+                <option value="30">有，在大蒙特利尔地区 CMM (30分)</option>
+                <option value="50">有，在蒙特利尔以外偏远地区 (50分)</option>
+            </select>
+        </div>
+
+        <div id="step-9" class="step-container sp-step" data-name="配偶加分">
+            <h2 class="question-title text-pink-600">配偶的年龄是？</h2>
+            <select id="sp_age" class="select-ui sp-calc-single border-pink-200 focus:border-pink-500">
+                <option value="20">20 - 30 岁 (20分)</option>
+                <option value="18">16 - 19 岁 或 31 岁 (18分)</option>
+                <option value="14">35 岁 (14分)</option>
+                <option value="10">37 岁 (10分)</option>
+                <option value="6">40 岁 (6分)</option>
+                <option value="0">45 岁及以上 (0分)</option>
+            </select>
+        </div>
+
+        <div id="step-10" class="step-container sp-step" data-name="配偶加分">
+            <h2 class="question-title text-pink-600">配偶的最高学历是？</h2>
+            <select id="sp_edu" class="select-ui sp-calc-single border-pink-200 focus:border-pink-500">
+                <option value="20">博士 / 医学专科 / 硕士 (20分)</option>
+                <option value="16">大学本科 3-4年 (16分)</option>
+                <option value="12">大专技术类 3年 (12分)</option>
+                <option value="8">大专技术类 1-2年 (8分)</option>
+                <option value="4">职业培训 DEP 900小时+ (4分)</option>
+                <option value="2">普通高中 (2分)</option>
+            </select>
+        </div>
+
+        <div id="step-11" class="step-container sp-step" data-name="配偶加分">
+            <h2 class="question-title text-pink-600">配偶的法语口语水平？</h2>
+            <select id="sp_fr" class="select-ui sp-calc-single border-pink-200 focus:border-pink-500">
+                <option value="0">Niveau 1-3 / 不懂法语 (0分)</option>
+                <option value="4">Niveau 4 (4分)</option>
+                <option value="6">Niveau 5-6 (6分)</option>
+                <option value="8">Niveau 7-8 (8分)</option>
+                <option value="10">Niveau 9-12 (10分)</option>
+            </select>
+        </div>
+
+        <div id="step-12" class="step-container text-center">
+            <div class="inline-block px-4 py-2 bg-slate-100 rounded-full text-slate-500 text-sm font-bold mb-6 mt-4">您的 1400分制 测评报告</div>
+            <div class="w-56 h-56 mx-auto bg-gradient-to-br from-blue-50 to-white rounded-full flex items-center justify-center border-8 border-blue-100 shadow-[0_0_40px_rgba(37,99,235,0.1)] mb-8">
+                <div class="text-center">
+                    <span id="final-score" class="text-7xl font-black text-blue-700 tracking-tighter">0</span>
+                    <span class="block text-sm font-bold text-slate-400 mt-2">/ 1400</span>
+                </div>
+            </div>
+            <p id="result-advice" class="text-base font-semibold text-slate-700 bg-slate-50 p-5 rounded-2xl leading-relaxed text-left"></p>
+            
+            <button onclick="location.reload()" class="mt-10 w-full bg-slate-900 text-white py-4 rounded-xl font-bold active:scale-95 transition-all">重新测算一遍</button>
+        </div>
+
+    </main>
+
+    <div id="nav-footer" class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-100 p-4 pb-8 z-50 hidden">
+        <div class="max-w-md mx-auto flex gap-3">
+            <button id="btn-prev" onclick="prevStep()" class="w-1/3 bg-slate-100 text-slate-600 font-bold py-4 rounded-xl active:scale-95 transition-all hidden">上一步</button>
+            <button id="btn-next" onclick="nextStep()" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-200 active:scale-95 transition-all">下一步</button>
+        </div>
+    </div>
+
+    <script>
+        // 注意：加入了 0 作为欢迎页
+        const singlePath = [0, 1, 2, 3, 4, 5, 6, 7, 8, 12];
+        const marriedPath = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        
+        let currentPathIndex = 0;
+        let currentPath = singlePath;
+
+        function updateUI() {
+            const isMarried = document.getElementById('marital').value === 'married';
+            currentPath = isMarried ? marriedPath : singlePath;
+            
+            const activeStepId = currentPath[currentPathIndex];
+            const isWelcomeStep = currentPathIndex === 0;
+            const isLastStep = currentPathIndex === currentPath.length - 1;
+
+            // 切换页面显示
+            document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
+            const activeEl = document.getElementById(`step-${activeStepId}`);
+            activeEl.classList.add('active');
+
+            // 头部和底部控制
+            const topHeader = document.getElementById('top-header');
+            const navFooter = document.getElementById('nav-footer');
+            const mainContent = document.querySelector('main');
+
+            if (isWelcomeStep) {
+                topHeader.classList.add('hidden');
+                navFooter.classList.add('hidden');
+                mainContent.classList.replace('pt-28', 'pt-10'); // 欢迎页不需要给 header 留白
+            } else if (!isLastStep) {
+                topHeader.classList.remove('hidden');
+                navFooter.classList.remove('hidden');
+                mainContent.classList.replace('pt-10', 'pt-28'); // 给 fixed header 留白
+                
+                // 计算进度 (排除了欢迎页和结果页)
+                const currentQuestionNum = currentPathIndex;
+                const totalQuestions = currentPath.length - 2;
+                
+                document.getElementById('step-counter').innerText = `${currentQuestionNum} / ${totalQuestions}`;
+                document.getElementById('step-name').innerText = activeEl.getAttribute('data-name');
+                const progressPct = (currentQuestionNum / totalQuestions) * 100;
+                document.getElementById('progress-bar').style.width = `${progressPct === 0 ? 5 : progressPct}%`;
+
+                // 底部按钮控制
+                const btnPrev = document.getElementById('btn-prev');
+                const btnNext = document.getElementById('btn-next');
+                
+                if (currentPathIndex === 1) { // 第一道题
+                    btnPrev.classList.add('hidden');
+                    btnNext.className = "w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg active:scale-95 transition-all";
+                } else {
+                    btnPrev.classList.remove('hidden');
+                    if (currentPathIndex === currentPath.length - 2) { // 最后一道题
+                        btnNext.innerText = "查看总分";
+                        btnNext.className = "w-2/3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-emerald-200 active:scale-95 transition-all";
+                    } else {
+                        btnNext.innerText = "下一步";
+                        btnNext.className = "w-2/3 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-200 active:scale-95 transition-all";
+                    }
+                }
+            } else {
+                // 结果页
+                topHeader.classList.add('hidden');
+                navFooter.classList.add('hidden');
+                mainContent.classList.replace('pt-28', 'pt-10');
+                calculateFinalScore();
+            }
+        }
+
+        function nextStep() {
+            if (currentPathIndex < currentPath.length - 1) {
+                currentPathIndex++;
+                window.scrollTo(0, 0);
+                updateUI();
+            }
+        }
+
+        function prevStep() {
+            if (currentPathIndex > 0) {
+                currentPathIndex--;
+                window.scrollTo(0, 0);
+                updateUI();
+            }
+        }
+
+        function calculateFinalScore() {
+            const isMarried = document.getElementById('marital').value === 'married';
+            const valueIndex = isMarried ? 1 : 0;
+            let total = 0;
+
+            document.querySelectorAll('.calc-item').forEach(item => {
+                total += parseInt(item.value.split(',')[valueIndex]);
+            });
+
+            document.querySelectorAll('.calc-single').forEach(item => {
+                total += parseInt(item.value);
+            });
+
+            if (isMarried) {
+                document.querySelectorAll('.sp-calc-single').forEach(item => {
+                    total += parseInt(item.value);
+                });
+            }
+
+            let current = 0;
+            const target = total;
+            const timer = setInterval(() => {
+                current += Math.ceil((target - current) / 10) || 1;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                    showAdvice(target);
+                }
+                document.getElementById('final-score').innerText = current;
+            }, 25);
+        }
+
+        function showAdvice(score) {
+            const adviceEl = document.getElementById('result-advice');
+            if (score >= 600) {
+                adviceEl.innerHTML = "🎉 <strong class='text-emerald-600'>分数极具竞争力！</strong><br><br>您的硬性条件非常出色，建议尽快准备法语成绩单、学历认证等材料入池。";
+            } else if (score >= 450) {
+                adviceEl.innerHTML = "💡 <strong class='text-blue-600'>潜力稳健阵营。</strong><br><br>您的分数在常规池中处于中游。若能拿到<span class='text-blue-600 font-bold'>蒙特利尔以外地区的 VJO (加50分)</span>，获邀概率将大幅飙升。";
+            } else {
+                adviceEl.innerHTML = "⚠️ <strong class='text-amber-600'>暂不具备强竞争力。</strong><br><br>在 1400 分制下，建议您重点突击法语（确保双项达到 B2 即 Niveau 7 以上），或考虑积累魁省本地工作经验。";
+            }
+        }
+
+        // 初始化
+        updateUI();
+    </script>
+</body>
+</html>
