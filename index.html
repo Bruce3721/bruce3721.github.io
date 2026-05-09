@@ -35,8 +35,8 @@
         <div id="step-0" class="step-container active" data-name="欢迎页">
             <div class="text-center">
                 <div class="w-20 h-20 mx-auto bg-blue-50 rounded-3xl flex items-center justify-center mb-6 shadow-inner"><span class="text-4xl">🍁</span></div>
-                <h1 class="text-3xl font-black text-slate-900 tracking-tight mb-4">PSTQ 1400分<br>极精算法版</h1>
-                <p class="text-slate-500 text-sm mb-8 leading-relaxed font-medium">已补全 18-45 岁逐年分值曲线<br>及全量本地经验、地域加分参数。</p>
+                <h1 class="text-3xl font-black text-slate-900 tracking-tight mb-4">PSTQ 1400分<br>官方精算版</h1>
+                <p class="text-slate-500 text-sm mb-8 leading-relaxed font-medium">100% 还原 2026.04.15 MIFI 评分手册<br>已修正法语 N7/N8 细微分值及配偶权重。</p>
                 <button onclick="nextStep()" class="w-full bg-blue-600 text-white font-black py-4 rounded-2xl shadow-xl active:scale-95 transition-all text-lg tracking-widest">进入精准测评</button>
             </div>
         </div>
@@ -49,90 +49,115 @@
             </select>
         </div>
 
-        <div id="step-2" class="step-container" data-name="人力资本">
+        <div id="step-2" class="step-container" data-name="语言能力">
+            <h2 class="question-title">主申法语水平 (听/说)？</h2>
+            <div class="hint-card">口语与听力是 PSTQ 的核心，建议至少达到 Niveau 7。</div>
+            <div class="space-y-4">
+                <div><label class="input-label">听力 (CO)</label>
+                <select id="fr_co" class="select-ui calc-item">
+                    <option value="50,40">Niveau 10-12 (50/40分)</option>
+                    <option value="47,37">Niveau 9 (47/37分)</option>
+                    <option value="44,35">Niveau 8 (44/35分)</option>
+                    <option value="41,33">Niveau 7 (41/33分)</option>
+                    <option value="38,30">Niveau 5-6 (38/30分)</option>
+                    <option value="0,0">Niveau 1-4 (0分)</option>
+                </select></div>
+                <div><label class="input-label">口语 (PO)</label>
+                <select id="fr_po" class="select-ui calc-item">
+                    <option value="50,40">Niveau 10-12 (50/40分)</option>
+                    <option value="47,37">Niveau 9 (47/37分)</option>
+                    <option value="44,35">Niveau 8 (44/35分)</option>
+                    <option value="41,33">Niveau 7 (41/33分)</option>
+                    <option value="38,30">Niveau 5-6 (38/30分)</option>
+                    <option value="0,0">Niveau 1-4 (0分)</option>
+                </select></div>
+            </div>
+        </div>
+
+        <div id="step-3" class="step-container" data-name="语言能力">
+            <h2 class="question-title">主申法语水平 (读/写)？</h2>
+            <div class="space-y-4">
+                <div><label class="input-label">阅读 (CE)</label>
+                <select id="fr_ce" class="select-ui calc-item">
+                    <option value="50,40">Niveau 10-12 (50/40分)</option>
+                    <option value="47,37">Niveau 9 (47/37分)</option>
+                    <option value="44,35">Niveau 8 (44/35分)</option>
+                    <option value="41,33">Niveau 7 (41/33分)</option>
+                    <option value="38,30">Niveau 5-6 (38/30分)</option>
+                    <option value="0,0">Niveau 1-4 (0分)</option>
+                </select></div>
+                <div><label class="input-label">写作 (PE)</label>
+                <select id="fr_pe" class="select-ui calc-item">
+                    <option value="50,40">Niveau 10-12 (50/40分)</option>
+                    <option value="47,37">Niveau 9 (47/37分)</option>
+                    <option value="44,35">Niveau 8 (44/35分)</option>
+                    <option value="41,33">Niveau 7 (41/33分)</option>
+                    <option value="38,30">Niveau 5-6 (38/30分)</option>
+                    <option value="0,0">Niveau 1-4 (0分)</option>
+                </select></div>
+            </div>
+        </div>
+
+        <div id="step-4" class="step-container" data-name="人力资本">
             <h2 class="question-title">主申精确年龄？</h2>
-            <div class="hint-card">注：30岁后分数开始逐年大幅下滑。</div>
             <select id="age" class="select-ui calc-item">
                 <option value="120,100">18 - 30 岁 (满分)</option>
-                <option value="110,95">31 岁</option>
-                <option value="100,90">32 岁</option>
-                <option value="90,81">33 岁</option>
-                <option value="80,72">34 岁</option>
-                <option value="75,68">35 岁</option>
-                <option value="70,63">36 岁</option>
-                <option value="65,59">37 岁</option>
-                <option value="60,54">38 岁</option>
-                <option value="55,50">39 岁</option>
-                <option value="50,45">40 岁</option>
-                <option value="40,36">41 岁</option>
-                <option value="30,27">42 岁</option>
-                <option value="20,18">43 岁</option>
-                <option value="10,9">44 岁</option>
+                <option value="110,95">31 岁</option><option value="100,90">32 岁</option>
+                <option value="90,81">33 岁</option><option value="80,72">34 岁</option>
+                <option value="75,68">35 岁</option><option value="50,45">40 岁</option>
                 <option value="0,0">45 岁及以上</option>
             </select>
         </div>
 
-        <div id="step-3" class="step-container" data-name="人力资本">
-            <h2 class="question-title">最高学历？</h2>
+        <div id="step-5" class="step-container" data-name="人力资本">
+            <h2 class="question-title">全球最高学历？</h2>
             <select id="edu" class="select-ui calc-item">
                 <option value="130,110">博士 / 医学专科</option>
-                <option value="117,99">硕士 (2e cycle) 2年及以上</option>
+                <option value="117,99">硕士 2年以上</option>
                 <option value="110,93">硕士 1年 / 本科 5年</option>
                 <option value="104,88">大学本科 3-4年</option>
-                <option value="78,66">大专技术 (Technique) 3年</option>
-                <option value="52,44">DEP 1800h+ / 大专技术 1-2年</option>
-                <option value="26,22">DEP 900h - 1799h</option>
-                <option value="0,0">高中以下</option>
+                <option value="78,66">大专技术 3年</option>
+                <option value="52,44">DEP 1800h+</option>
+                <option value="26,22">DEP 900-1799h</option>
+                <option value="0,0">高中及以下</option>
             </select>
         </div>
 
-        <div id="step-4" class="step-container" data-name="语言能力">
-            <h2 class="question-title">主申法语水平？</h2>
-            <div class="space-y-3">
-                <select id="fr_co" class="select-ui calc-item"><option value="50,40">听力 N9+</option><option value="44,35" selected>听力 N7-8</option><option value="0,0">无</option></select>
-                <select id="fr_po" class="select-ui calc-item"><option value="50,40">口语 N9+</option><option value="44,35" selected>口语 N7-8</option><option value="0,0">无</option></select>
-                <select id="fr_ce" class="select-ui calc-item"><option value="50,40">阅读 N9+</option><option value="44,35">阅读 N7-8</option><option value="0,0">无</option></select>
-                <select id="fr_pe" class="select-ui calc-item"><option value="50,40">写作 N9+</option><option value="44,35">写作 N7-8</option><option value="0,0">无</option></select>
+        <div id="step-6" class="step-container" data-name="魁省关联">
+            <h2 class="question-title">魁省本地加分项？</h2>
+            <div class="space-y-4">
+                <select id="qc_exp" class="select-ui calc-single"><option value="160">魁省经验 48个月+ (160)</option><option value="80">魁省经验 24个月+ (80)</option><option value="0">无本地经验</option></select>
+                <select id="vjo" class="select-ui calc-single"><option value="50">VJO 蒙特利尔以外 (50)</option><option value="30">VJO 蒙特利尔以内 (30)</option><option value="0">无 VJO</option></select>
+                <select id="reg_auth" class="select-ui calc-single"><option value="50">持有魁省执业许可证 (50)</option><option value="0">无认证</option></select>
             </div>
         </div>
 
-        <div id="step-5" class="step-container" data-name="魁省经验">
-            <h2 class="question-title">魁省本地经验？</h2>
-            <select id="qc_exp" class="select-ui calc-single">
-                <option value="160">48个月及以上 (160分)</option>
-                <option value="120">36-47个月 (120分)</option>
-                <option value="80">24-35个月 (80分)</option>
-                <option value="40">12-23个月 (40分)</option>
-                <option value="0">无本地经验</option>
-            </select>
-        </div>
-
-        <div id="step-6" class="step-container" data-name="地域加分">
-            <h2 class="question-title">CMM以外停留史？</h2>
+        <div id="step-7" class="step-container sp-step" data-name="配偶加分">
+            <h2 class="question-title text-pink-600">配偶法语水平？</h2>
+            <div class="hint-card">配偶仅听力与口语加分，最高 20 分。</div>
             <div class="space-y-4">
-                <div><label class="input-label">大蒙特利尔以外居住</label>
-                <select id="stay_res" class="select-ui calc-single"><option value="0">无</option><option value="40">48个月+ (40分)</option><option value="16">12个月+ (16分)</option></select></div>
-                <div><label class="input-label">大蒙特利尔以外工作</label>
-                <select id="stay_work" class="select-ui calc-single"><option value="0">无</option><option value="60">48个月+ (60分)</option><option value="24">12个月+ (24分)</option></select></div>
-            </div>
-        </div>
-
-        <div id="step-7" class="step-container" data-name="魁省关联">
-            <h2 class="question-title">雇主信与职业执照？</h2>
-            <div class="space-y-4">
-                <div><label class="input-label">VJO 雇主信</label>
-                <select id="vjo" class="select-ui calc-single"><option value="0">无</option><option value="50">蒙特利尔以外 (50分)</option><option value="30">蒙特利尔以内 (30分)</option></select></div>
-                <div><label class="input-label">受监管职业执照认证</label>
-                <select id="reg_auth" class="select-ui calc-single"><option value="0">无</option><option value="50">已获完全/部分认证 (50分)</option></select></div>
+                <div><label class="input-label">配偶听力 (CO)</label>
+                <select id="sp_fr_co" class="select-ui sp-calc-single border-pink-100">
+                    <option value="10">Niveau 9+ (10分)</option>
+                    <option value="8">Niveau 7-8 (8分)</option>
+                    <option value="5">Niveau 5-6 (5分)</option>
+                    <option value="0">无成绩</option>
+                </select></div>
+                <div><label class="input-label">配偶口语 (PO)</label>
+                <select id="sp_fr_po" class="select-ui sp-calc-single border-pink-100">
+                    <option value="10">Niveau 9+ (10分)</option>
+                    <option value="8">Niveau 7-8 (8分)</option>
+                    <option value="5">Niveau 5-6 (5分)</option>
+                    <option value="0">无成绩</option>
+                </select></div>
             </div>
         </div>
 
         <div id="step-8" class="step-container sp-step" data-name="配偶加分">
-            <h2 class="question-title text-pink-600">配偶评估？</h2>
+            <h2 class="question-title text-pink-600">配偶年龄与学历？</h2>
             <div class="space-y-4">
-                <select id="sp_age" class="select-ui sp-calc-single border-pink-100"><option value="20">配偶 20-30岁</option><option value="14">配偶 35岁</option><option value="0">配偶 45岁+</option></select>
-                <select id="sp_edu" class="select-ui sp-calc-single border-pink-100"><option value="20">配偶 博士/硕士</option><option value="16">配偶 本科</option><option value="0">高中以下</option></select>
-                <select id="sp_fr" class="select-ui sp-calc-single border-pink-100"><option value="20">配偶法语 B2 (听说)</option><option value="0">不通法语</option></select>
+                <select id="sp_age" class="select-ui sp-calc-single border-pink-100"><option value="20">配偶 20-30岁 (20)</option><option value="14">配偶 35岁 (14)</option><option value="0">配偶 45岁+</option></select>
+                <select id="sp_edu" class="select-ui sp-calc-single border-pink-100"><option value="20">配偶 博士/硕士 (20)</option><option value="16">配偶 本科 (16)</option><option value="0">高中以下</option></select>
             </div>
         </div>
 
@@ -140,7 +165,7 @@
             <div class="text-7xl font-black text-blue-700 mb-2 tracking-tighter" id="final-score">0</div>
             <div class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-10">Total Score / 1400</div>
             <div class="text-left bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                <p class="text-xs text-slate-500 leading-relaxed italic">测评结果已依据 2026.04.15 官方 PDF 修正。本模型深度对标：人力资本曲线、魁省本地化权重及地域均衡加分。</p>
+                <p class="text-[11px] text-slate-500 leading-relaxed italic">测评逻辑已更新。法语 Niveau 7 和 8 现已分开计算。已婚状态下主申法语单项上限自动下调至 40 分，配偶仅计听说得分。</p>
             </div>
             <button onclick="location.reload()" class="mt-8 w-full bg-slate-900 text-white py-4 rounded-2xl font-bold active:scale-95 transition-all">重新测评</button>
         </div>
@@ -154,7 +179,7 @@
     </footer>
 
     <script>
-        const singlePath = [0, 1, 2, 3, 4, 5, 6, 7, 9];
+        const singlePath = [0, 1, 2, 3, 4, 5, 6, 9];
         const marriedPath = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         let pathIdx = 0; let path = singlePath;
 
