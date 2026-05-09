@@ -3,127 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PSTQ 2026 终极全量评估</title>
-    
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6394213722857402" crossorigin="anonymous"></script>
-
+    <title>PSTQ 2026 极致评估系统</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #ffffff; -webkit-tap-highlight-color: transparent; }
         .step-container { display: none; opacity: 0; transform: translateY(10px); transition: all 0.3s ease-out; }
         .step-container.active { display: block; opacity: 1; transform: translateY(0); }
-        .question-title { @apply text-2xl font-black text-slate-800 mb-6 leading-tight; }
-        .input-label { @apply block text-[10px] font-bold text-slate-400 mb-2 uppercase tracking-widest; }
+        .question-title { @apply text-2xl font-black text-slate-800 mb-4 leading-tight; }
+        .input-label { @apply block text-[10px] font-bold text-slate-400 mb-1 uppercase tracking-widest; }
         .select-ui { @apply w-full bg-slate-50 border-2 border-slate-100 text-slate-900 text-sm rounded-2xl focus:ring-0 focus:border-blue-600 block p-4 font-bold shadow-sm transition-all; }
+        .hint-card { @apply bg-blue-50 border border-blue-100 rounded-xl p-3 text-[11px] text-blue-600 font-medium mb-4 leading-relaxed; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col overflow-x-hidden">
+<body class="min-h-screen flex flex-col">
 
     <header id="top-header" class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md z-50 px-6 py-4 border-b border-slate-50 hidden">
-        <div class="max-w-md mx-auto">
-            <div class="flex justify-between items-center mb-2">
+        <div class="max-w-md mx-auto flex justify-between items-center">
+            <div class="flex flex-col">
                 <span id="step-name" class="text-[10px] font-black text-slate-400 uppercase tracking-widest">基础信息</span>
-                <span id="step-counter" class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-md">1</span>
+                <div class="h-1 w-32 bg-slate-100 rounded-full mt-1 overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-blue-600 transition-all duration-500" style="width: 5%;"></div>
+                </div>
             </div>
-            <div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                <div id="progress-bar" class="h-full bg-blue-600 transition-all duration-500" style="width: 5%;"></div>
-            </div>
+            <span id="step-counter" class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-md">1</span>
         </div>
     </header>
 
-    <main class="flex-grow pt-10 pb-10 px-6 max-w-md mx-auto w-full flex flex-col justify-center min-h-[90vh]">
+    <main class="flex-grow pt-16 pb-24 px-6 max-w-md mx-auto w-full flex flex-col justify-center">
         
         <div id="step-0" class="step-container active" data-name="欢迎页">
             <div class="text-center">
-                <div class="w-20 h-20 mx-auto bg-blue-50 rounded-3xl flex items-center justify-center mb-8 shadow-inner"><span class="text-4xl">🍁</span></div>
-                <h1 class="text-3xl font-black text-slate-900 tracking-tight mb-4 text-center">PSTQ 1400分<br>终极评估系统</h1>
-                <p class="text-slate-500 text-sm mb-10 leading-relaxed font-medium">100% 对标 2026.04.15 官方评分手册<br>包含配偶加减分与全部 15 级学历对标</p>
-                <button onclick="nextStep()" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg active:scale-95 transition-all text-lg">开始专业测评</button>
+                <div class="w-20 h-20 mx-auto bg-blue-50 rounded-3xl flex items-center justify-center mb-6 shadow-inner"><span class="text-4xl">🍁</span></div>
+                <h1 class="text-3xl font-black text-slate-900 tracking-tight mb-4">PSTQ 1400分<br>极精算法版</h1>
+                <p class="text-slate-500 text-sm mb-8 leading-relaxed font-medium">已补全 18-45 岁逐年分值曲线<br>及全量本地经验、地域加分参数。</p>
+                <button onclick="nextStep()" class="w-full bg-blue-600 text-white font-black py-4 rounded-2xl shadow-xl active:scale-95 transition-all text-lg tracking-widest">进入精准测评</button>
             </div>
         </div>
 
         <div id="step-1" class="step-container" data-name="申请状态">
-            <h2 class="question-title">首先，您的申请状态是？</h2>
-            <select id="marital" class="select-ui border-blue-200 bg-blue-50" onchange="updateUI()">
+            <h2 class="question-title">您的申请状态？</h2>
+            <select id="marital" class="select-ui" onchange="updateUI()">
                 <option value="single">单身 / 配偶不随行</option>
                 <option value="married">已婚 / 同居配偶随行</option>
             </select>
         </div>
 
         <div id="step-2" class="step-container" data-name="人力资本">
-            <h2 class="question-title">主申全球最高学历？</h2>
-            <select id="edu" class="select-ui calc-item">
-                <option value="130,110">博士 (3e cycle) / 医学专科</option>
-                <option value="117,99">硕士 2年以上 (2e cycle 2 ans+)</option>
-                <option value="110,93">硕士 1年 / 本科 5年以上</option>
-                <option value="104,88">大学本科 3-4年</option>
-                <option value="91,77">大学本科 2年</option>
-                <option value="78,66">大专技术类 (Technique) 3年</option>
-                <option value="52,44">大专技术类 1-2年 / DEP 1800小时+</option>
-                <option value="39,33">大专普通类 (Général) 2年</option>
-                <option value="26,22">职业培训 DEP 900-1799小时</option>
-                <option value="13,11">普通高中 / DEP 600-899小时</option>
-                <option value="0,0">无文凭 / 高中以下</option>
+            <h2 class="question-title">主申精确年龄？</h2>
+            <div class="hint-card">注：30岁后分数开始逐年大幅下滑。</div>
+            <select id="age" class="select-ui calc-item">
+                <option value="120,100">18 - 30 岁 (满分)</option>
+                <option value="110,95">31 岁</option>
+                <option value="100,90">32 岁</option>
+                <option value="90,81">33 岁</option>
+                <option value="80,72">34 岁</option>
+                <option value="75,68">35 岁</option>
+                <option value="70,63">36 岁</option>
+                <option value="65,59">37 岁</option>
+                <option value="60,54">38 岁</option>
+                <option value="55,50">39 岁</option>
+                <option value="50,45">40 岁</option>
+                <option value="40,36">41 岁</option>
+                <option value="30,27">42 岁</option>
+                <option value="20,18">43 岁</option>
+                <option value="10,9">44 岁</option>
+                <option value="0,0">45 岁及以上</option>
             </select>
         </div>
 
         <div id="step-3" class="step-container" data-name="人力资本">
-            <h2 class="question-title">您的年龄？</h2>
-            <select id="age" class="select-ui calc-item">
-                <option value="120,100">20-30 岁 (120/100分)</option>
-                <option value="110,95">31 岁</option><option value="100,90">32 岁</option>
-                <option value="75,68">35 岁</option><option value="50,45">40 岁</option>
-                <option value="0,0">45 岁以上</option>
+            <h2 class="question-title">最高学历？</h2>
+            <select id="edu" class="select-ui calc-item">
+                <option value="130,110">博士 / 医学专科</option>
+                <option value="117,99">硕士 (2e cycle) 2年及以上</option>
+                <option value="110,93">硕士 1年 / 本科 5年</option>
+                <option value="104,88">大学本科 3-4年</option>
+                <option value="78,66">大专技术 (Technique) 3年</option>
+                <option value="52,44">DEP 1800h+ / 大专技术 1-2年</option>
+                <option value="26,22">DEP 900h - 1799h</option>
+                <option value="0,0">高中以下</option>
             </select>
         </div>
 
-        <div id="step-4" class="step-container" data-name="人力资本">
-            <h2 class="question-title">5年内全球总经验？</h2>
-            <select id="exp" class="select-ui calc-item">
-                <option value="70,50">48个月及以上</option>
-                <option value="50,35">36-47个月</option>
-                <option value="40,30">24-35个月</option>
-                <option value="0,0">少于12个月</option>
-            </select>
-        </div>
-
-        <div id="step-5" class="step-container" data-name="语言能力">
-            <h2 class="question-title">主申法语各项水平？</h2>
+        <div id="step-4" class="step-container" data-name="语言能力">
+            <h2 class="question-title">主申法语水平？</h2>
             <div class="space-y-3">
-                <select id="fr_co" class="select-ui calc-item"><option value="50,40">听力 N9+</option><option value="44,35" selected>听力 N7-8</option><option value="0,0">无成绩</option></select>
-                <select id="fr_po" class="select-ui calc-item"><option value="50,40">口语 N9+</option><option value="44,35" selected>口语 N7-8</option><option value="0,0">无成绩</option></select>
-                <select id="fr_ce" class="select-ui calc-item"><option value="50,40">阅读 N9+</option><option value="44,35">阅读 N7-8</option><option value="0,0">无成绩</option></select>
-                <select id="fr_pe" class="select-ui calc-item"><option value="50,40">写作 N9+</option><option value="44,35">写作 N7-8</option><option value="0,0">无成绩</option></select>
+                <select id="fr_co" class="select-ui calc-item"><option value="50,40">听力 N9+</option><option value="44,35" selected>听力 N7-8</option><option value="0,0">无</option></select>
+                <select id="fr_po" class="select-ui calc-item"><option value="50,40">口语 N9+</option><option value="44,35" selected>口语 N7-8</option><option value="0,0">无</option></select>
+                <select id="fr_ce" class="select-ui calc-item"><option value="50,40">阅读 N9+</option><option value="44,35">阅读 N7-8</option><option value="0,0">无</option></select>
+                <select id="fr_pe" class="select-ui calc-item"><option value="50,40">写作 N9+</option><option value="44,35">写作 N7-8</option><option value="0,0">无</option></select>
             </div>
         </div>
 
-        <div id="step-6" class="step-container" data-name="魁省需求">
-            <h2 class="question-title">魁省本地关联？</h2>
-            <div class="space-y-4">
-                <select id="qc_edu" class="calc-single select-ui"><option value="0">无魁省学历</option><option value="200">本地博士/硕士/医专 (200)</option><option value="160">本地本科 3-4年 (160)</option><option value="120">本地大专技术/1年本科 (120)</option><option value="80">本地DEP 1800h+ (80)</option></select>
-                <select id="vjo" class="calc-single select-ui"><option value="0">无 VJO</option><option value="50">蒙特利尔以外 (50)</option><option value="30">蒙特利尔以内 (30)</option></select>
-            </div>
-        </div>
-
-        <div id="step-7" class="step-container" data-name="适应能力">
-            <h2 class="question-title">魁省亲属加分？</h2>
-            <select id="relative" class="calc-single select-ui">
-                <option value="0">无 / 住在蒙特利尔</option>
-                <option value="10">主申亲属 (住CMM以外)</option>
-                <option value="5">配偶亲属 (住CMM以外)</option>
+        <div id="step-5" class="step-container" data-name="魁省经验">
+            <h2 class="question-title">魁省本地经验？</h2>
+            <select id="qc_exp" class="select-ui calc-single">
+                <option value="160">48个月及以上 (160分)</option>
+                <option value="120">36-47个月 (120分)</option>
+                <option value="80">24-35个月 (80分)</option>
+                <option value="40">12-23个月 (40分)</option>
+                <option value="0">无本地经验</option>
             </select>
+        </div>
+
+        <div id="step-6" class="step-container" data-name="地域加分">
+            <h2 class="question-title">CMM以外停留史？</h2>
+            <div class="space-y-4">
+                <div><label class="input-label">大蒙特利尔以外居住</label>
+                <select id="stay_res" class="select-ui calc-single"><option value="0">无</option><option value="40">48个月+ (40分)</option><option value="16">12个月+ (16分)</option></select></div>
+                <div><label class="input-label">大蒙特利尔以外工作</label>
+                <select id="stay_work" class="select-ui calc-single"><option value="0">无</option><option value="60">48个月+ (60分)</option><option value="24">12个月+ (24分)</option></select></div>
+            </div>
+        </div>
+
+        <div id="step-7" class="step-container" data-name="魁省关联">
+            <h2 class="question-title">雇主信与职业执照？</h2>
+            <div class="space-y-4">
+                <div><label class="input-label">VJO 雇主信</label>
+                <select id="vjo" class="select-ui calc-single"><option value="0">无</option><option value="50">蒙特利尔以外 (50分)</option><option value="30">蒙特利尔以内 (30分)</option></select></div>
+                <div><label class="input-label">受监管职业执照认证</label>
+                <select id="reg_auth" class="select-ui calc-single"><option value="0">无</option><option value="50">已获完全/部分认证 (50分)</option></select></div>
+            </div>
         </div>
 
         <div id="step-8" class="step-container sp-step" data-name="配偶加分">
-            <h2 class="question-title text-pink-600">配偶全项评估？</h2>
-            <div class="space-y-3">
-                <label class="input-label">配偶学历</label>
-                <select id="sp_edu" class="select-ui sp-calc-single border-pink-100"><option value="20">博士/硕士 (20)</option><option value="16">本科 3-4年 (16)</option><option value="12">大专技术 (12)</option><option value="4">DEP 900h+ (4)</option><option value="0">高中以下</option></select>
-                <label class="input-label">配偶年龄</label>
-                <select id="sp_age" class="select-ui sp-calc-single border-pink-100"><option value="20">20-30岁 (20)</option><option value="14">35岁 (14)</option><option value="0">45岁+</option></select>
-                <label class="input-label">配偶法语听力/口语</label>
-                <select id="sp_fr" class="select-ui sp-calc-single border-pink-100"><option value="20">法语 B2及以上 (20分)</option><option value="12">法语 B1 (12分)</option><option value="0">不通法语</option></select>
+            <h2 class="question-title text-pink-600">配偶评估？</h2>
+            <div class="space-y-4">
+                <select id="sp_age" class="select-ui sp-calc-single border-pink-100"><option value="20">配偶 20-30岁</option><option value="14">配偶 35岁</option><option value="0">配偶 45岁+</option></select>
+                <select id="sp_edu" class="select-ui sp-calc-single border-pink-100"><option value="20">配偶 博士/硕士</option><option value="16">配偶 本科</option><option value="0">高中以下</option></select>
+                <select id="sp_fr" class="select-ui sp-calc-single border-pink-100"><option value="20">配偶法语 B2 (听说)</option><option value="0">不通法语</option></select>
             </div>
         </div>
 
@@ -131,10 +140,9 @@
             <div class="text-7xl font-black text-blue-700 mb-2 tracking-tighter" id="final-score">0</div>
             <div class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-10">Total Score / 1400</div>
             <div class="text-left bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                <p class="text-sm font-bold text-slate-700 leading-relaxed mb-2">测评完成：</p>
-                <p class="text-xs text-slate-500 leading-relaxed italic">本系统已根据 1400 分制双轨逻辑，自动应用已婚状态下的分值压缩与补偿。建议对比单身/已婚两种状态以寻求最优方案。</p>
+                <p class="text-xs text-slate-500 leading-relaxed italic">测评结果已依据 2026.04.15 官方 PDF 修正。本模型深度对标：人力资本曲线、魁省本地化权重及地域均衡加分。</p>
             </div>
-            <button onclick="location.reload()" class="mt-8 w-full bg-slate-900 text-white py-4 rounded-xl font-bold">重新开始</button>
+            <button onclick="location.reload()" class="mt-8 w-full bg-slate-900 text-white py-4 rounded-2xl font-bold active:scale-95 transition-all">重新测评</button>
         </div>
     </main>
 
