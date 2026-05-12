@@ -7,168 +7,249 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: radial-gradient(circle at top right, #f8fafc, #eff6ff); 
-            -webkit-tap-highlight-color: transparent; 
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: radial-gradient(circle at top right, #f8fafc, #eff6ff); -webkit-tap-highlight-color: transparent; }
         .glass-card { @apply bg-white/80 backdrop-blur-xl border border-white shadow-2xl shadow-blue-100/50 rounded-[2.5rem]; }
         .step-container { display: none; opacity: 0; transform: scale(0.98) translateY(10px); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         .step-container.active { display: block; opacity: 1; transform: scale(1) translateY(0); }
-        .btn-primary { @apply w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-5 rounded-2xl shadow-lg shadow-blue-200 active:scale-[0.97] transition-all; }
+        .btn-primary { @apply w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-5 rounded-2xl shadow-lg active:scale-[0.97] transition-all; }
         .select-ui { @apply w-full bg-white border-2 border-slate-100 text-slate-900 text-sm rounded-2xl focus:ring-4 focus:ring-blue-50/50 focus:border-blue-600 block p-4 font-bold shadow-sm transition-all appearance-none; }
         .category-tag { @apply px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-4 inline-block; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col no-scrollbar">
+<body class="min-h-screen flex flex-col">
 
     <header id="top-header" class="fixed top-0 left-0 right-0 z-50 px-6 py-6 hidden">
         <div class="max-w-md mx-auto glass-card !rounded-3xl p-4 flex items-center justify-between shadow-lg">
             <div class="flex items-center gap-3">
-                <div class="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></div>
-                <span id="step-name" class="text-[10px] font-black text-slate-400 uppercase tracking-widest">初始化中</span>
+                <div class="w-2 px-2 py-0.5 bg-blue-600 rounded text-[8px] text-white font-black" id="step-counter">1</div>
+                <span id="step-name" class="text-[10px] font-black text-slate-400 uppercase tracking-widest">初始化</span>
             </div>
-            <div class="flex items-center gap-2">
-                <span id="step-counter" class="text-xs font-bold text-blue-600">1</span>
-                <div class="w-20 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                    <div id="progress-bar" class="h-full bg-blue-600 transition-all duration-500" style="width: 10%;"></div>
-                </div>
+            <div class="w-24 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                <div id="progress-bar" class="h-full bg-blue-600 transition-all duration-500" style="width: 10%;"></div>
             </div>
         </div>
     </header>
 
-    <main class="flex-grow px-6 flex flex-col justify-center max-w-md mx-auto w-full relative">
+    <main class="flex-grow px-6 flex flex-col justify-center max-w-md mx-auto w-full">
         
         <div id="step-0" class="step-container active">
             <div class="text-center">
-                <div class="w-24 h-24 mx-auto bg-white rounded-[2rem] flex items-center justify-center mb-10 shadow-2xl shadow-blue-100">
-                    <span class="text-5xl">🍁</span>
-                </div>
-                <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">PSTQ 2026<br><span class="text-blue-600">极致测算</span></h1>
+                <div class="w-24 h-24 mx-auto bg-white rounded-[2rem] flex items-center justify-center mb-10 shadow-xl"><span class="text-5xl">🍁</span></div>
+                <h1 class="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">PSTQ 2026<br><span class="text-blue-600">智算中心</span></h1>
                 <p class="text-slate-400 text-sm mb-12 font-medium">依据 2026.04.15 官方评分手册精算 [cite: 2]</p>
-                
-                <div class="grid grid-cols-2 gap-3 mb-12">
-                    <div class="p-4 bg-white rounded-3xl border border-slate-50 text-left shadow-sm">
-                        <div class="text-blue-600 font-black text-xl mb-1">1400</div>
-                        <div class="text-[9px] text-slate-400 uppercase font-bold tracking-tighter">最高总分上限 [cite: 4]</div>
-                    </div>
-                    <div class="p-4 bg-white rounded-3xl border border-slate-50 text-left shadow-sm">
-                        <div class="text-emerald-500 font-black text-xl mb-1">23项</div>
-                        <div class="text-[9px] text-slate-400 uppercase font-bold tracking-tighter">全指标逻辑对标</div>
-                    </div>
-                </div>
-                
-                <button onclick="nextStep()" class="btn-primary text-lg tracking-widest">开启测评</button>
+                <button onclick="nextStep()" class="btn-primary">开启深度评估</button>
             </div>
         </div>
 
-        <div id="step-1" class="step-container">
-            <span class="category-tag bg-blue-100 text-blue-600">Step 01 / Profile</span>
+        <div id="step-1" class="step-container" data-name="申请资料">
+            <span class="category-tag bg-blue-100 text-blue-600">Profile</span>
             <h2 class="question-title">确定您的申请身份？</h2>
-            <p class="text-slate-400 text-xs mb-8 font-medium leading-relaxed">系统将根据身份自动加载单身/已婚双轨评分逻辑 [cite: 10]。</p>
-            <div class="space-y-4">
+            <div class="space-y-3 mt-6">
                 <button onclick="setMarital('single')" class="w-full p-6 bg-white border-2 border-slate-100 rounded-3xl text-left hover:border-blue-600 transition-all group">
-                    <div class="font-bold text-slate-800 group-hover:text-blue-600">单身申请</div>
-                    <div class="text-[10px] text-slate-400 mt-1">主申享有最高人力资本上限分值 [cite: 10, 53]</div>
+                    <div class="font-bold text-slate-800">单身申请</div>
                 </button>
                 <button onclick="setMarital('married')" class="w-full p-6 bg-white border-2 border-slate-100 rounded-3xl text-left hover:border-blue-600 transition-all group">
-                    <div class="font-bold text-slate-800 group-hover:text-blue-600">已婚/同居配偶随行</div>
-                    <div class="text-[10px] text-slate-400 mt-1">主申分值将被压缩，由配偶贡献补偿 [cite: 10, 121]</div>
+                    <div class="font-bold text-slate-800">已婚 / 随行配偶</div>
                 </button>
             </div>
             <select id="marital" class="hidden"><option value="single">single</option><option value="married">married</option></select>
         </div>
 
-        <div id="step-2" class="step-container" data-name="人力资本 ">
-            <span class="category-tag bg-blue-100 text-blue-600">Step 02 / Language</span>
-            <h2 class="question-title">主申法语等级？</h2>
-            <div class="space-y-4 mt-6">
-                <div>
-                    <label class="input-label">听力 (CO) [cite: 10]</label>
-                    <select id="fr_co" class="select-ui calc-item"><option value="50,40">N9-12 (满分)</option><option value="44,35" selected>N7-8 (B2)</option><option value="38,30">N5-6 (B1)</option><option value="0,0">N1-4</option></select>
-                </div>
-                <div>
-                    <label class="input-label">口语 (PO) [cite: 11]</label>
-                    <select id="fr_po" class="select-ui calc-item"><option value="50,40">N9-12 (满分)</option><option value="44,35" selected>N7-8 (B2)</option><option value="38,30">N5-6 (B1)</option><option value="0,0">N1-4</option></select>
-                </div>
-            </div>
-            <button onclick="nextStep()" class="btn-primary mt-10">下一步</button>
+        <div id="step-2" class="step-container" data-name="人力资本">
+            <span class="category-tag bg-emerald-100 text-emerald-600">Human Capital</span>
+            <h2 class="question-title">主申请人精确年龄？</h2>
+            <select id="age" class="select-ui calc-item mt-6">
+                <option value="120,100">20 - 30 岁 (满分)</option>
+                <option value="110,95">31 岁</option>
+                <option value="100,90">32 岁</option>
+                <option value="75,68">35 岁</option>
+                <option value="50,45">40 岁</option>
+                <option value="0,0">45 岁及以上</option>
+            </select>
+            <button onclick="nextStep()" class="btn-primary mt-8">下一步</button>
         </div>
 
-        <div id="step-3" class="step-container text-center pt-10">
+        <div id="step-3" class="step-container" data-name="人力资本">
+            <span class="category-tag bg-emerald-100 text-emerald-600">Human Capital</span>
+            <h2 class="question-title">主申最高学历？</h2>
+            <select id="edu" class="select-ui calc-item mt-6">
+                <option value="130,110">博士 / 医学专家</option>
+                <option value="117,99">硕士 2 年+</option>
+                <option value="110,93">硕士 1 年 / 本科 5 年</option>
+                <option value="104,88">大学本科 3-4 年</option>
+                <option value="78,66">大专技术 3 年 / 本科 1 年</option>
+                <option value="26,22">DEP 900h+</option>
+            </select>
+            <button onclick="nextStep()" class="btn-primary mt-8">下一步</button>
+        </div>
+
+        <div id="step-4" class="step-container" data-name="人力资本">
+            <span class="category-tag bg-emerald-100 text-emerald-600">Human Capital</span>
+            <h2 class="question-title">5年内全球总经验？</h2>
+            <select id="exp" class="select-ui calc-item mt-6">
+                <option value="70,50">48 个月及以上</option>
+                <option value="40,30">24 - 35 个月</option>
+                <option value="0,0">少于 12 个月</option>
+            </select>
+            <button onclick="nextStep()" class="btn-primary mt-8">下一步</button>
+        </div>
+
+        <div id="step-5" class="step-container" data-name="语言能力">
+            <span class="category-tag bg-blue-100 text-blue-600">Language</span>
+            <h2 class="question-title">主申法语 (听/说)？</h2>
+            <div class="space-y-4 mt-6">
+                <select id="fr_co" class="select-ui calc-item"><option value="50,40">听力 N9+</option><option value="44,35" selected>听力 N7-8</option><option value="0,0">N1-4</option></select>
+                <select id="fr_po" class="select-ui calc-item"><option value="50,40">口语 N9+</option><option value="44,35" selected>口语 N7-8</option><option value="0,0">N1-4</option></select>
+            </div>
+            <button onclick="nextStep()" class="btn-primary mt-8">下一步</button>
+        </div>
+
+        <div id="step-6" class="step-container" data-name="魁省需求">
+            <span class="category-tag bg-orange-100 text-orange-600">Quebec Needs</span>
+            <h2 class="question-title">职业紧缺评估？</h2>
+            <select id="diag" class="select-ui calc-single mt-6">
+                <option value="120">极度紧缺 (Déficit) + 48m+</option>
+                <option value="100">轻度紧缺 + 48m+</option>
+                <option value="25">平衡职业 + 48m+</option>
+                <option value="0">无对应经验</option>
+            </select>
+            <button onclick="nextStep()" class="btn-primary mt-8">下一步</button>
+        </div>
+
+        <div id="step-7" class="step-container" data-name="魁省需求">
+            <span class="category-tag bg-orange-100 text-orange-600">Quebec Needs</span>
+            <h2 class="question-title">魁省本地关联？</h2>
+            <div class="space-y-4 mt-6">
+                <div><label class="text-[10px] font-bold text-slate-400 ml-1">本地学历 (Max 200)</label>
+                <select id="qc_edu" class="select-ui calc-single"><option value="200">本地博士/硕士</option><option value="160">本地本科</option><option value="0">无</option></select></div>
+                <div><label class="text-[10px] font-bold text-slate-400 ml-1">VJO 雇主信</label>
+                <select id="vjo" class="select-ui calc-single"><option value="50">蒙城以外</option><option value="30">蒙城以内</option><option value="0">无</option></select></div>
+            </div>
+            <button onclick="nextStep()" class="btn-primary mt-8">下一步</button>
+        </div>
+
+        <div id="step-8" class="step-container" data-name="配偶评估">
+            <span class="category-tag bg-pink-100 text-pink-600">Spouse</span>
+            <h2 class="question-title">配偶年龄与学历？</h2>
+            <div class="space-y-4 mt-6">
+                <select id="sp_age" class="select-ui sp-calc border-pink-100"><option value="20">配偶 20-30岁</option><option value="0">45岁+</option></select>
+                <select id="sp_edu" class="select-ui sp-calc border-pink-100"><option value="20">配偶 博士/硕士</option><option value="16">配偶 本科</option><option value="0">高中</option></select>
+            </div>
+            <button onclick="nextStep()" class="btn-primary mt-8">下一步</button>
+        </div>
+
+        <div id="step-9" class="step-container" data-name="配偶评估">
+            <span class="category-tag bg-pink-100 text-pink-600">Spouse</span>
+            <h2 class="question-title">配偶法语水平？</h2>
+            <div class="space-y-4 mt-6">
+                <select id="sp_fr_co" class="select-ui sp-calc border-pink-100"><option value="10">配偶听力 N9+</option><option value="8">N7-8</option><option value="0">无</option></select>
+                <select id="sp_fr_po" class="select-ui sp-calc-single border-pink-100"><option value="10">配偶口语 N9+</option><option value="8">N7-8</option><option value="0">无</option></select>
+            </div>
+            <button onclick="nextStep()" class="btn-primary mt-8">下一步</button>
+        </div>
+
+        <div id="step-10" class="step-container" data-name="配偶评估">
+            <span class="category-tag bg-pink-100 text-pink-600">Spouse</span>
+            <h2 class="question-title">配偶本地经验？</h2>
+            <select id="sp_qc_exp" class="select-ui sp-calc mt-6 border-pink-100">
+                <option value="30">魁省工作 48m+</option><option value="10">12m+</option><option value="0">无</option>
+            </select>
+            <button onclick="nextStep()" class="btn-primary mt-8">下一步</button>
+        </div>
+
+        <div id="step-11" class="step-container text-center pt-10">
             <div class="relative inline-block mb-10">
                 <svg class="w-48 h-48 transform -rotate-90">
                     <circle cx="96" cy="96" r="88" stroke="currentColor" stroke-width="12" fill="transparent" class="text-slate-100"/>
                     <circle cx="96" cy="96" r="88" stroke="currentColor" stroke-width="12" fill="transparent" class="text-blue-600" stroke-dasharray="552.92" id="score-circle"/>
                 </svg>
                 <div class="absolute inset-0 flex flex-col items-center justify-center">
-                    <span id="final-score" class="text-6xl font-black text-slate-900 tracking-tighter">0</span>
+                    <span id="final-score" class="text-6xl font-black text-slate-900">0</span>
                     <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">Points</span>
                 </div>
             </div>
-            
             <div class="glass-card p-8 text-left mb-10">
-                <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <span class="w-2 h-5 bg-blue-600 rounded-full"></span>
-                    评估报告
-                </h3>
-                <p class="text-xs text-slate-500 leading-relaxed mb-6">测算结果严格对标 2026 评分手册。包含：人力资本（520分）、魁省需求（700分）及适应因素（180分）[cite: 6, 68, 107]。</p>
-                <div class="flex items-center gap-4 p-4 bg-blue-50 rounded-2xl">
-                    <div class="text-2xl">💡</div>
-                    <div class="text-[10px] text-blue-700 font-bold leading-tight">建议：若主申/配偶法语未达 N7，建议优先攻克听力与口语以锁定核心分值 [cite: 10, 125]。</div>
-                </div>
+                <h3 class="font-bold text-slate-800 mb-2">评估完成</h3>
+                <p class="text-xs text-slate-500 leading-relaxed">结果依据 2026 最新官方 1400 分制精算。配偶双轨算法已自动应用。</p>
             </div>
-
-            <button onclick="location.reload()" class="w-full py-5 text-slate-400 font-bold hover:text-blue-600 transition-colors">重新测算</button>
+            <button onclick="location.reload()" class="w-full py-5 text-slate-400 font-bold">重新测算</button>
         </div>
 
     </main>
 
     <footer id="nav-footer" class="fixed bottom-10 left-0 right-0 z-50 px-6 hidden">
-        <div class="max-w-md mx-auto flex gap-3">
-            <button id="btn-prev" onclick="prevStep()" class="w-20 h-16 glass-card flex items-center justify-center text-slate-400 hover:text-blue-600 transition-colors">
+        <div class="max-w-md mx-auto">
+            <button id="btn-prev" onclick="prevStep()" class="w-16 h-16 glass-card flex items-center justify-center text-slate-400 hover:text-blue-600 transition-colors">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"/></svg>
             </button>
         </div>
     </footer>
 
     <script>
+        // 【核心修正】定义完整的跳转路径
+        const singlePath = [0, 1, 2, 3, 4, 5, 6, 7, 11]; // 跳过配偶 8,9,10
+        const marriedPath = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; 
+        
         let pathIdx = 0;
-        const path = [0, 1, 2, 3]; // 示例简化路径，可按需扩展
+        let currentPath = singlePath;
 
         function setMarital(val) {
             document.getElementById('marital').value = val;
+            currentPath = (val === 'married') ? marriedPath : singlePath;
             nextStep();
         }
 
         function updateUI() {
-            const activeId = path[pathIdx];
+            const activeId = currentPath[pathIdx];
+            const isLast = pathIdx === currentPath.length - 1;
+
             document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
             document.getElementById(`step-${activeId}`).classList.add('active');
 
             const h = document.getElementById('top-header');
             const f = document.getElementById('nav-footer');
             
-            if (pathIdx === 0 || pathIdx === path.length - 1) { 
+            if (pathIdx === 0 || isLast) { 
                 h.classList.add('hidden'); f.classList.add('hidden'); 
             } else { 
                 h.classList.remove('hidden'); f.classList.remove('hidden'); 
                 document.getElementById('step-counter').innerText = pathIdx;
-                document.getElementById('progress-bar').style.width = `${(pathIdx / (path.length - 2)) * 100}%`;
-                document.getElementById('step-name').innerText = document.getElementById(`step-${activeId}`).getAttribute('data-name') || '资料录入';
+                document.getElementById('progress-bar').style.width = `${(pathIdx / (currentPath.length - 2)) * 100}%`;
+                document.getElementById('step-name').innerText = document.getElementById(`step-${activeId}`).getAttribute('data-name');
             }
+            document.getElementById('btn-prev').style.visibility = (pathIdx <= 1) ? 'hidden' : 'visible';
         }
 
-        function nextStep() { pathIdx++; window.scrollTo(0,0); updateUI(); if(pathIdx === path.length-1) calc(); }
-        function prevStep() { if(pathIdx > 0) { pathIdx--; window.scrollTo(0,0); updateUI(); } }
+        function nextStep() { 
+            if(pathIdx < currentPath.length - 1) {
+                pathIdx++; 
+                window.scrollTo(0,0); 
+                updateUI(); 
+                if(pathIdx === currentPath.length - 1) calc(); 
+            }
+        }
+        
+        function prevStep() { 
+            if(pathIdx > 0) { 
+                pathIdx--; 
+                window.scrollTo(0,0); 
+                updateUI(); 
+            } 
+        }
 
         function calc() {
             const isM = document.getElementById('marital').value === 'married';
             const vIdx = isM ? 1 : 0;
             let total = 0;
-            document.querySelectorAll('.calc-item').forEach(el => { total += parseInt(el.value.split(',')[vIdx]) || 0; });
             
-            // 结果动画
+            // 计算主申项
+            document.querySelectorAll('.calc-item').forEach(el => { total += parseInt(el.value.split(',')[vIdx]) || 0; });
+            document.querySelectorAll('.calc-single').forEach(el => { total += parseInt(el.value) || 0; });
+            // 计算配偶项
+            if (isM) {
+                document.querySelectorAll('.sp-calc').forEach(el => { total += parseInt(el.value) || 0; });
+            }
+            
             let cur = 0;
             const t = setInterval(() => {
                 cur += Math.ceil((total - cur) / 10) || 1;
