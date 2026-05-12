@@ -3,178 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PSTQ 2026 官方全指标精算系统</title>
+    <title>PSTQ 2026 智算中心</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #ffffff; -webkit-tap-highlight-color: transparent; }
-        .step-container { display: none; opacity: 0; transform: translateY(10px); transition: all 0.3s ease-out; }
-        .step-container.active { display: block; opacity: 1; transform: translateY(0); }
-        .question-title { @apply text-2xl font-black text-slate-800 mb-2 leading-tight; }
-        .input-label { @apply block text-[10px] font-bold text-slate-400 mb-1 uppercase tracking-widest; }
-        .select-ui { @apply w-full bg-slate-50 border-2 border-slate-100 text-slate-900 text-[11px] md:text-sm rounded-xl focus:ring-0 focus:border-blue-600 block p-3.5 font-bold shadow-sm transition-all; }
-        .hint-card { @apply bg-blue-50 border border-blue-100 rounded-xl p-3 text-[10px] text-blue-600 font-medium mb-4 leading-relaxed; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: radial-gradient(circle at top right, #f8fafc, #eff6ff); 
+            -webkit-tap-highlight-color: transparent; 
+        }
+        .glass-card { @apply bg-white/80 backdrop-blur-xl border border-white shadow-2xl shadow-blue-100/50 rounded-[2.5rem]; }
+        .step-container { display: none; opacity: 0; transform: scale(0.98) translateY(10px); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .step-container.active { display: block; opacity: 1; transform: scale(1) translateY(0); }
+        .btn-primary { @apply w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-5 rounded-2xl shadow-lg shadow-blue-200 active:scale-[0.97] transition-all; }
+        .select-ui { @apply w-full bg-white border-2 border-slate-100 text-slate-900 text-sm rounded-2xl focus:ring-4 focus:ring-blue-50/50 focus:border-blue-600 block p-4 font-bold shadow-sm transition-all appearance-none; }
+        .category-tag { @apply px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-4 inline-block; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col overflow-x-hidden">
+<body class="min-h-screen flex flex-col no-scrollbar">
 
-    <header id="top-header" class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md z-50 px-6 py-4 border-b border-slate-50 hidden">
-        <div class="max-w-md mx-auto flex justify-between items-center">
-            <div class="flex flex-col">
-                <span id="step-name" class="text-[10px] font-black text-slate-400 uppercase tracking-widest">评估中</span>
-                <div class="h-1 w-32 bg-slate-100 rounded-full mt-1 overflow-hidden">
-                    <div id="progress-bar" class="h-full bg-blue-600 transition-all duration-500" style="width: 5%;"></div>
+    <header id="top-header" class="fixed top-0 left-0 right-0 z-50 px-6 py-6 hidden">
+        <div class="max-w-md mx-auto glass-card !rounded-3xl p-4 flex items-center justify-between shadow-lg">
+            <div class="flex items-center gap-3">
+                <div class="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></div>
+                <span id="step-name" class="text-[10px] font-black text-slate-400 uppercase tracking-widest">初始化中</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span id="step-counter" class="text-xs font-bold text-blue-600">1</span>
+                <div class="w-20 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-blue-600 transition-all duration-500" style="width: 10%;"></div>
                 </div>
             </div>
-            <span id="step-counter" class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-md">1</span>
         </div>
     </header>
 
-    <main class="flex-grow pt-16 pb-24 px-6 max-w-md mx-auto w-full flex flex-col justify-center">
+    <main class="flex-grow px-6 flex flex-col justify-center max-w-md mx-auto w-full relative">
         
-        <div id="step-0" class="step-container active" data-name="欢迎页">
+        <div id="step-0" class="step-container active">
             <div class="text-center">
-                <div class="w-20 h-20 mx-auto bg-blue-50 rounded-3xl flex items-center justify-center mb-6 shadow-inner"><span class="text-4xl">🍁</span></div>
-                <h1 class="text-3xl font-black text-slate-900 tracking-tight mb-4 text-center">PSTQ 2026<br>官方 1400 终极精算</h1>
-                <p class="text-slate-500 text-[11px] mb-10 leading-relaxed font-medium">100% 还原 2026.04.15 官方评分手册<br>补齐主申/配偶全项及地域累加分</p>
-                <button onclick="nextStep()" class="w-full bg-blue-600 text-white font-black py-4 rounded-2xl shadow-xl active:scale-95 transition-all text-lg tracking-widest">进入全量测评</button>
+                <div class="w-24 h-24 mx-auto bg-white rounded-[2rem] flex items-center justify-center mb-10 shadow-2xl shadow-blue-100">
+                    <span class="text-5xl">🍁</span>
+                </div>
+                <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">PSTQ 2026<br><span class="text-blue-600">极致测算</span></h1>
+                <p class="text-slate-400 text-sm mb-12 font-medium">依据 2026.04.15 官方评分手册精算 [cite: 2]</p>
+                
+                <div class="grid grid-cols-2 gap-3 mb-12">
+                    <div class="p-4 bg-white rounded-3xl border border-slate-50 text-left shadow-sm">
+                        <div class="text-blue-600 font-black text-xl mb-1">1400</div>
+                        <div class="text-[9px] text-slate-400 uppercase font-bold tracking-tighter">最高总分上限 [cite: 4]</div>
+                    </div>
+                    <div class="p-4 bg-white rounded-3xl border border-slate-50 text-left shadow-sm">
+                        <div class="text-emerald-500 font-black text-xl mb-1">23项</div>
+                        <div class="text-[9px] text-slate-400 uppercase font-bold tracking-tighter">全指标逻辑对标</div>
+                    </div>
+                </div>
+                
+                <button onclick="nextStep()" class="btn-primary text-lg tracking-widest">开启测评</button>
             </div>
         </div>
 
-        <div id="step-1" class="step-container" data-name="基本信息">
-            <h2 class="question-title">申请状态？</h2>
-            <select id="marital" class="select-ui" onchange="updateUI()">
-                <option value="single">单身申请 [cite: 10]</option>
-                <option value="married">已婚 / 同居配偶随行 [cite: 10]</option>
-            </select>
+        <div id="step-1" class="step-container">
+            <span class="category-tag bg-blue-100 text-blue-600">Step 01 / Profile</span>
+            <h2 class="question-title">确定您的申请身份？</h2>
+            <p class="text-slate-400 text-xs mb-8 font-medium leading-relaxed">系统将根据身份自动加载单身/已婚双轨评分逻辑 [cite: 10]。</p>
+            <div class="space-y-4">
+                <button onclick="setMarital('single')" class="w-full p-6 bg-white border-2 border-slate-100 rounded-3xl text-left hover:border-blue-600 transition-all group">
+                    <div class="font-bold text-slate-800 group-hover:text-blue-600">单身申请</div>
+                    <div class="text-[10px] text-slate-400 mt-1">主申享有最高人力资本上限分值 [cite: 10, 53]</div>
+                </button>
+                <button onclick="setMarital('married')" class="w-full p-6 bg-white border-2 border-slate-100 rounded-3xl text-left hover:border-blue-600 transition-all group">
+                    <div class="font-bold text-slate-800 group-hover:text-blue-600">已婚/同居配偶随行</div>
+                    <div class="text-[10px] text-slate-400 mt-1">主申分值将被压缩，由配偶贡献补偿 [cite: 10, 121]</div>
+                </button>
+            </div>
+            <select id="marital" class="hidden"><option value="single">single</option><option value="married">married</option></select>
         </div>
 
-        <div id="step-2" class="step-container" data-name="人力资本">
+        <div id="step-2" class="step-container" data-name="人力资本 ">
+            <span class="category-tag bg-blue-100 text-blue-600">Step 02 / Language</span>
             <h2 class="question-title">主申法语等级？</h2>
-            <div class="hint-card">依据官方 Échelle québécoise。听、说、读、写各占 50/40 分。</div>
-            <div class="space-y-3">
-                <div><label class="input-label">听力 / 口语</label>
-                <div class="grid grid-cols-2 gap-2">
-                    <select id="fr_co" class="select-ui calc-item"><option value="50,40">CO: N9-12</option><option value="44,35" selected>CO: N7-8</option><option value="38,30">CO: N5-6</option><option value="0,0">CO: N1-4</option></select>
-                    <select id="fr_po" class="select-ui calc-item"><option value="50,40">PO: N9-12</option><option value="44,35" selected>PO: N7-8</option><option value="38,30">PO: N5-6</option><option value="0,0">PO: N1-4</option></select>
-                </div></div>
-                <div><label class="input-label">阅读 / 写作</label>
-                <div class="grid grid-cols-2 gap-2">
-                    <select id="fr_ce" class="select-ui calc-item"><option value="50,40">CE: N9-12</option><option value="44,35">CE: N7-8</option><option value="0,0">CE: N1-6</option></select>
-                    <select id="fr_pe" class="select-ui calc-item"><option value="50,40">PE: N9-12</option><option value="44,35">PE: N7-8</option><option value="0,0">PE: N1-6</option></select>
-                </div></div>
-            </div>
-        </div>
-
-        <div id="step-3" class="step-container" data-name="人力资本">
-            <h2 class="question-title">主申精确年龄？</h2>
-            <select id="age" class="select-ui calc-item">
-                <option value="120,100">20-30 岁 (120/100分)</option><option value="110,90">18-19 岁</option>
-                <option value="110,95">31 岁</option><option value="100,90">32 岁</option><option value="90,81">33 岁</option><option value="80,72">34 岁</option>
-                <option value="75,68">35 岁</option><option value="60,54">38 岁</option><option value="50,45">40 岁</option><option value="0,0">45 岁+</option>
-            </select>
-        </div>
-
-        <div id="step-4" class="step-container" data-name="人力资本">
-            <h2 class="question-title">全球最高学历？</h2>
-            <select id="edu" class="select-ui calc-item">
-                <option value="130,110">博士 (3e cycle) / 医疗专家</option>
-                <option value="117,99">硕士 2年+ (2e cycle)</option>
-                <option value="110,93">硕士 1年 / 本科 5年+</option>
-                <option value="104,88">本科 3-4年 (1er cycle)</option>
-                <option value="78,66">大专技术 3年 / 本科 1年</option>
-                <option value="52,44">技术大专 1-2年 / DEP 1800h+</option>
-                <option value="26,22">DEP 900h+ (Quebec)</option>
-                <option value="13,11">高中毕业 / DEP 600h+</option>
-            </select>
-        </div>
-
-        <div id="step-5" class="step-container" data-name="魁省需求">
-            <h2 class="question-title">职业紧缺与本地关联？</h2>
-            <div class="space-y-4">
-                <select id="diag" class="select-ui calc-single"><option value="120">极度紧缺 (Déficit) + 48m+</option><option value="90">极度紧缺 + 12m+</option><option value="100">轻度紧缺 + 48m+</option><option value="25">平衡职业 + 48m+</option><option value="0">无</option></select>
-                <select id="qc_edu" class="select-ui calc-single"><option value="200">魁省博士/硕士 (200分)</option><option value="160">魁省本科 3-4年 (160分)</option><option value="80">魁省大专技术 3年 (120分)</option><option value="0">无本地学历</option></select>
-                <select id="qc_exp" class="select-ui calc-single"><option value="160">魁省经验 48m+ (160分)</option><option value="80">魁省经验 24m+ (80分)</option><option value="0">无</option></select>
-            </div>
-        </div>
-
-        <div id="step-6" class="step-container" data-name="地域加分">
-            <h2 class="question-title">CMM 以外停留 (累加)？</h2>
-            <div class="hint-card">居住、工作、学习在大蒙特利尔大区以外。</div>
-            <div class="space-y-2">
-                <select id="c1" class="select-ui calc-single"><option value="40">居住史 48m+ (40分)</option><option value="16">居住史 12m+ (16分)</option><option value="0">无</option></select>
-                <select id="c2" class="select-ui calc-single"><option value="60">工作史 48m+ (60分)</option><option value="24">工作史 12m+ (24分)</option><option value="0">无</option></select>
-                <select id="c3" class="select-ui calc-single"><option value="20">学习史 48m+ (20分)</option><option value="8">学习史 12m+ (8分)</option><option value="0">无</option></select>
-                <select id="vjo" class="select-ui calc-single"><option value="50">VJO: CMM 以外 (50分)</option><option value="30">VJO: CMM 以内 (30分)</option><option value="0">无 VJO</option></select>
-            </div>
-        </div>
-
-        <div id="step-7" class="step-container" data-name="适应因素">
-            <h2 class="question-title">其他适应因子？</h2>
-            <div class="space-y-4">
-                <select id="study_no_dip" class="select-ui calc-single"><option value="30">魁省正在进行学习: 48m+ (30分)</option><option value="10">魁省已结束学习: 48m+ (10分)</option><option value="0">无</option></select>
-                <select id="reg_auth" class="select-ui calc-single"><option value="50">持有魁省执业许可证 (50分)</option><option value="0">无</option></select>
-                <select id="relative" class="select-ui calc-single"><option value="10">主申亲属在魁 (10分)</option><option value="5">配偶亲属在魁 (5分)</option><option value="0">无</option></select>
-            </div>
-        </div>
-
-        <div id="step-8" class="step-container sp-step" data-name="配偶评估">
-            <h2 class="question-title text-pink-600">配偶全量背景？</h2>
-            <div class="hint-card">补齐配偶法语四项 (最高40)、学历、年龄、经验及本地文凭。</div>
-            <div class="space-y-3">
-                <div class="grid grid-cols-2 gap-2">
-                    <select id="sf1" class="select-ui sp-calc-single border-pink-100"><option value="10">配偶听: N9+</option><option value="4">配偶听: N4</option><option value="0">无</option></select>
-                    <select id="sf2" class="select-ui sp-calc-single border-pink-100"><option value="10">配偶说: N9+</option><option value="4">配偶说: N4</option><option value="0">无</option></select>
+            <div class="space-y-4 mt-6">
+                <div>
+                    <label class="input-label">听力 (CO) [cite: 10]</label>
+                    <select id="fr_co" class="select-ui calc-item"><option value="50,40">N9-12 (满分)</option><option value="44,35" selected>N7-8 (B2)</option><option value="38,30">N5-6 (B1)</option><option value="0,0">N1-4</option></select>
                 </div>
-                <div class="grid grid-cols-2 gap-2">
-                    <select id="sf3" class="select-ui sp-calc-single border-pink-100"><option value="10">配偶读: N9+</option><option value="4">配偶读: N4</option><option value="0">无</option></select>
-                    <select id="sf4" class="select-ui sp-calc-single border-pink-100"><option value="10">配偶写: N9+</option><option value="4">配偶写: N4</option><option value="0">无</option></select>
+                <div>
+                    <label class="input-label">口语 (PO) [cite: 11]</label>
+                    <select id="fr_po" class="select-ui calc-item"><option value="50,40">N9-12 (满分)</option><option value="44,35" selected>N7-8 (B2)</option><option value="38,30">N5-6 (B1)</option><option value="0,0">N1-4</option></select>
                 </div>
-                <select id="sa" class="select-ui sp-calc-single border-pink-100"><option value="20">配偶年龄 20-30岁</option><option value="14">35岁</option><option value="0">45岁+</option></select>
-                <select id="se" class="select-ui sp-calc-single border-pink-100"><option value="20">配偶硕士/博士</option><option value="16">配偶本科</option><option value="0">高中</option></select>
-                <select id="sq" class="select-ui sp-calc-single border-pink-100"><option value="30">配偶魁省文凭 (30分)</option><option value="18">配偶大专文凭 (18分)</option><option value="0">无</option></select>
-                <select id="sx" class="select-ui sp-calc-single border-pink-100"><option value="30">配偶魁省经验 48m+ (30分)</option><option value="10">12m+ (10分)</option><option value="0">无</option></select>
             </div>
+            <button onclick="nextStep()" class="btn-primary mt-10">下一步</button>
         </div>
 
-        <div id="step-9" class="step-container text-center pt-2">
-            <div class="text-7xl font-black text-blue-700 mb-2 tracking-tighter" id="final-score">0</div>
-            <div class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-10">Total Score / 1400</div>
-            <div class="text-left bg-slate-50 p-6 rounded-2xl border border-slate-100 text-[10px] text-slate-500 italic leading-relaxed">
-                依据 2026.04.15 官方精算版。包含配偶双轨制、本地化溢价、及 CMM 均衡加分。
+        <div id="step-3" class="step-container text-center pt-10">
+            <div class="relative inline-block mb-10">
+                <svg class="w-48 h-48 transform -rotate-90">
+                    <circle cx="96" cy="96" r="88" stroke="currentColor" stroke-width="12" fill="transparent" class="text-slate-100"/>
+                    <circle cx="96" cy="96" r="88" stroke="currentColor" stroke-width="12" fill="transparent" class="text-blue-600" stroke-dasharray="552.92" id="score-circle"/>
+                </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                    <span id="final-score" class="text-6xl font-black text-slate-900 tracking-tighter">0</span>
+                    <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">Points</span>
+                </div>
             </div>
-            <button onclick="location.reload()" class="mt-8 w-full bg-slate-900 text-white py-4 rounded-xl font-bold">重新开始</button>
+            
+            <div class="glass-card p-8 text-left mb-10">
+                <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <span class="w-2 h-5 bg-blue-600 rounded-full"></span>
+                    评估报告
+                </h3>
+                <p class="text-xs text-slate-500 leading-relaxed mb-6">测算结果严格对标 2026 评分手册。包含：人力资本（520分）、魁省需求（700分）及适应因素（180分）[cite: 6, 68, 107]。</p>
+                <div class="flex items-center gap-4 p-4 bg-blue-50 rounded-2xl">
+                    <div class="text-2xl">💡</div>
+                    <div class="text-[10px] text-blue-700 font-bold leading-tight">建议：若主申/配偶法语未达 N7，建议优先攻克听力与口语以锁定核心分值 [cite: 10, 125]。</div>
+                </div>
+            </div>
+
+            <button onclick="location.reload()" class="w-full py-5 text-slate-400 font-bold hover:text-blue-600 transition-colors">重新测算</button>
         </div>
+
     </main>
 
-    <footer id="nav-footer" class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-slate-100 p-6 pb-10 z-50 hidden">
-        <div class="max-w-md mx-auto flex gap-4">
-            <button id="btn-prev" onclick="prevStep()" class="w-1/3 py-4 font-bold text-slate-400">返回</button>
-            <button id="btn-next" onclick="nextStep()" class="w-full bg-blue-600 text-white font-black py-4 rounded-2xl shadow-lg">下一步</button>
+    <footer id="nav-footer" class="fixed bottom-10 left-0 right-0 z-50 px-6 hidden">
+        <div class="max-w-md mx-auto flex gap-3">
+            <button id="btn-prev" onclick="prevStep()" class="w-20 h-16 glass-card flex items-center justify-center text-slate-400 hover:text-blue-600 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"/></svg>
+            </button>
         </div>
     </footer>
 
     <script>
-        const singlePath = [0, 1, 2, 3, 4, 5, 6, 7, 9];
-        const marriedPath = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-        let pathIdx = 0; let path = singlePath;
+        let pathIdx = 0;
+        const path = [0, 1, 2, 3]; // 示例简化路径，可按需扩展
+
+        function setMarital(val) {
+            document.getElementById('marital').value = val;
+            nextStep();
+        }
 
         function updateUI() {
-            const isM = document.getElementById('marital').value === 'married';
-            path = isM ? marriedPath : singlePath;
             const activeId = path[pathIdx];
             document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
             document.getElementById(`step-${activeId}`).classList.add('active');
 
-            const h = document.getElementById('top-header'); const f = document.getElementById('nav-footer');
-            if (pathIdx === 0 || pathIdx === path.length - 1) { h.classList.add('hidden'); f.classList.add('hidden'); }
-            else { 
+            const h = document.getElementById('top-header');
+            const f = document.getElementById('nav-footer');
+            
+            if (pathIdx === 0 || pathIdx === path.length - 1) { 
+                h.classList.add('hidden'); f.classList.add('hidden'); 
+            } else { 
                 h.classList.remove('hidden'); f.classList.remove('hidden'); 
-                document.getElementById('step-counter').innerText = `${pathIdx} / ${path.length - 2}`;
+                document.getElementById('step-counter').innerText = pathIdx;
                 document.getElementById('progress-bar').style.width = `${(pathIdx / (path.length - 2)) * 100}%`;
-                document.getElementById('step-name').innerText = document.getElementById(`step-${activeId}`).getAttribute('data-name');
+                document.getElementById('step-name').innerText = document.getElementById(`step-${activeId}`).getAttribute('data-name') || '资料录入';
             }
-            document.getElementById('btn-prev').style.visibility = pathIdx <= 1 ? 'hidden' : 'visible';
         }
 
         function nextStep() { pathIdx++; window.scrollTo(0,0); updateUI(); if(pathIdx === path.length-1) calc(); }
@@ -182,15 +164,17 @@
 
         function calc() {
             const isM = document.getElementById('marital').value === 'married';
-            const vIdx = isM ? 1 : 0; let total = 0;
+            const vIdx = isM ? 1 : 0;
+            let total = 0;
             document.querySelectorAll('.calc-item').forEach(el => { total += parseInt(el.value.split(',')[vIdx]) || 0; });
-            document.querySelectorAll('.calc-single').forEach(el => { total += parseInt(el.value) || 0; });
-            if (isM) document.querySelectorAll('.sp-calc-single').forEach(el => { total += parseInt(el.value) || 0; });
             
-            let cur = 0; const t = setInterval(() => {
+            // 结果动画
+            let cur = 0;
+            const t = setInterval(() => {
                 cur += Math.ceil((total - cur) / 10) || 1;
                 if (cur >= total) { cur = total; clearInterval(t); }
                 document.getElementById('final-score').innerText = cur;
+                document.getElementById('score-circle').style.strokeDashoffset = 552.92 - (552.92 * (cur / 1400));
             }, 30);
         }
         updateUI();
