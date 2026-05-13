@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PSTQ 2026 官方智算中心</title>
+    <title>PSTQ 2026 智算中心 | 官方全量版</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
@@ -15,6 +15,7 @@
         .select-ui { @apply w-full bg-slate-50 border-2 border-slate-100 text-slate-900 text-xs md:text-sm rounded-2xl focus:ring-4 focus:ring-blue-50 focus:border-blue-600 block p-4 font-bold transition-all appearance-none; }
         .category-tag { @apply px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-4 inline-block; }
         .input-label { @apply block text-[10px] font-bold text-slate-400 mb-1 uppercase tracking-widest ml-1; }
+        ::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -38,8 +39,8 @@
         <div id="step-0" class="step-container active">
             <div class="text-center">
                 <div class="w-24 h-24 mx-auto bg-white rounded-[2rem] flex items-center justify-center mb-10 shadow-xl shadow-blue-50"><span class="text-5xl">🍁</span></div>
-                <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight mb-4 text-center">PSTQ 2026<br><span class="text-blue-600">全指标精算</span></h1>
-                <p class="text-slate-400 text-sm mb-12 font-medium">100% 还原 2026.04.15 官方评分手册细节</p>
+                <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight mb-4 text-center">PSTQ 2026<br><span class="text-blue-600">官方全指标精算</span></h1>
+                <p class="text-slate-400 text-sm mb-12 font-medium">100% 还原 18 页评分手册全参数</p>
                 <button onclick="nextStep()" class="btn-primary">开启深度测评</button>
             </div>
         </div>
@@ -49,8 +50,8 @@
             <h2 class="text-2xl font-black text-slate-800 mb-8">您的申请状态？</h2>
             <div class="space-y-3">
                 <button onclick="setMarital('single')" class="w-full p-6 bg-white border-2 border-slate-100 rounded-3xl text-left hover:border-blue-600 transition-all group">
-                    <div class="font-bold text-slate-800 group-hover:text-blue-600">单身申请</div>
-                    <div class="text-[10px] text-slate-400 mt-1">主申单项上限最高 130 分 </div>
+                    <div class="font-bold text-slate-800 group-hover:text-blue-600">单身申请 / 配偶不随行</div>
+                    <div class="text-[10px] text-slate-400 mt-1">主申享有最高人力资本分值上限</div>
                 </button>
                 <button onclick="setMarital('married')" class="w-full p-6 bg-white border-2 border-slate-100 rounded-3xl text-left hover:border-blue-600 transition-all group">
                     <div class="font-bold text-slate-800 group-hover:text-blue-600">已婚 / 随行配偶</div>
@@ -62,24 +63,29 @@
 
         <div id="step-2" class="step-container" data-name="人力资本">
             <span class="category-tag bg-emerald-100 text-emerald-600">Capital Humain</span>
-            <h2 class="text-2xl font-black text-slate-800 mb-6">主申基本背景？</h2>
+            <h2 class="text-2xl font-black text-slate-800 mb-6">主申硬性背景？</h2>
             <div class="space-y-4">
-                <div><label class="input-label">主申精确年龄</label>
+                <div><label class="input-label">主申精确年龄 (17档全量)</label>
                 <select id="age" class="select-ui calc-item">
-                    <option value="120,100">20-30 岁 (120/100) </option><option value="110,90">18-19 岁 (110/90) </option>
-                    <option value="110,95">31 岁 </option><option value="100,90">32 岁 </option><option value="90,81">33 岁 </option><option value="80,72">34 岁 </option>
-                    <option value="75,68">35 岁 </option><option value="50,45">40 岁 </option><option value="10,9">44 岁 </option><option value="0,0">45 岁及以上 </option>
+                    <option value="120,100">20-30 岁 (120/100)</option><option value="110,90">18-19 岁 (110/90)</option>
+                    <option value="110,95">31 岁</option><option value="100,90">32 岁</option><option value="90,81">33 岁</option><option value="80,72">34 岁</option>
+                    <option value="75,68">35 岁</option><option value="70,63">36 岁</option><option value="65,59">37 岁</option><option value="60,54">38 岁</option>
+                    <option value="55,50">39 岁</option><option value="50,45">40 岁</option><option value="40,36">41 岁</option><option value="30,27">42 岁</option>
+                    <option value="20,18">43 岁</option><option value="10,9">44 岁</option><option value="0,0">45 岁及以上</option>
                 </select></div>
-                <div><label class="input-label">最高学历层级</label>
+                <div><label class="input-label">主申学历 (16档全量对标)</label>
                 <select id="edu" class="select-ui calc-item">
-                    <option value="130,110">博士 (3e cycle) / 医疗专家 </option>
-                    <option value="117,99">硕士 2年以上 (2e cycle) </option>
-                    <option value="110,93">硕士 1年 / 本科 5年以上 </option>
-                    <option value="104,88">大学本科 3-4年 </option>
-                    <option value="78,66">大专技术 3年 / 本科 1年 </option>
-                    <option value="52,44">技术大专 1-2年 / DEP 1800h+ </option>
-                    <option value="26,22">DEP 900-1799h </option>
-                    <option value="13,11">高中毕业 / DEP 600-899h </option>
+                    <option value="130,110">博士 (3e cycle) / 医疗专家</option>
+                    <option value="117,99">硕士 2年以上 (2e cycle)</option>
+                    <option value="110,93">硕士 1年 / 本科 5年以上</option>
+                    <option value="104,88">大学本科 3-4年</option>
+                    <option value="91,77">大学本科 2年</option>
+                    <option value="78,66">大专技术 3年 / 本科 1年</option>
+                    <option value="52,44">技术大专 1-2年 / DEP 1800h+</option>
+                    <option value="39,33">普通大专 (Général) 2年</option>
+                    <option value="26,22">DEP 900-1799h / 海外职训 1年+</option>
+                    <option value="13,11">普通高中 / DEP 600-899h</option>
+                    <option value="0,0">高中以下</option>
                 </select></div>
             </div>
             <button onclick="nextStep()" class="btn-primary mt-10">下一步</button>
@@ -90,12 +96,12 @@
             <h2 class="text-2xl font-black text-slate-800 mb-6">主申法语等级？</h2>
             <div class="space-y-4">
                 <div class="grid grid-cols-2 gap-2">
-                    <div><label class="input-label">听力 (CO)</label><select id="f1" class="select-ui calc-item"><option value="50,40">N9-12 [cite: 10]</option><option value="44,35" selected>N7-8 [cite: 10]</option><option value="38,30">N5-6 [cite: 10]</option><option value="0,0">N1-4 [cite: 10]</option></select></div>
-                    <div><label class="input-label">口语 (PO)</label><select id="f2" class="select-ui calc-item"><option value="50,40">N9-12 [cite: 11]</option><option value="44,35" selected>N7-8 [cite: 11]</option><option value="38,30">N5-6 [cite: 11]</option><option value="0,0">N1-4 [cite: 11]</option></select></div>
+                    <div><label class="input-label">听力 (CO)</label><select id="f1" class="select-ui calc-item"><option value="50,40">N9-12</option><option value="44,35" selected>N7-8</option><option value="38,30">N5-6</option><option value="0,0">N1-4</option></select></div>
+                    <div><label class="input-label">口语 (PO)</label><select id="f2" class="select-ui calc-item"><option value="50,40">N9-12</option><option value="44,35" selected>N7-8</option><option value="38,30">N5-6</option><option value="0,0">N1-4</option></select></div>
                 </div>
                 <div class="grid grid-cols-2 gap-2">
-                    <div><label class="input-label">阅读 (CE)</label><select id="f3" class="select-ui calc-item"><option value="50,40">N9-12 [cite: 12]</option><option value="44,35">N7-8 [cite: 12]</option><option value="38,30">N5-6 [cite: 12]</option><option value="0,0">N1-4 [cite: 12]</option></select></div>
-                    <div><label class="input-label">写作 (PE)</label><select id="f4" class="select-ui calc-item"><option value="50,40">N9-12 [cite: 13]</option><option value="44,35">N7-8 [cite: 13]</option><option value="38,30">N5-6 [cite: 13]</option><option value="0,0">N1-4 [cite: 13]</option></select></div>
+                    <div><label class="input-label">阅读 (CE)</label><select id="f3" class="select-ui calc-item"><option value="50,40">N9-12</option><option value="44,35">N7-8</option><option value="38,30">N5-6</option><option value="0,0">N1-4</option></select></div>
+                    <div><label class="input-label">写作 (PE)</label><select id="f4" class="select-ui calc-item"><option value="50,40">N9-12</option><option value="44,35">N7-8</option><option value="38,30">N5-6</option><option value="0,0">N1-4</option></select></div>
                 </div>
             </div>
             <button onclick="nextStep()" class="btn-primary mt-10">下一步</button>
@@ -105,20 +111,23 @@
             <span class="category-tag bg-orange-100 text-orange-600">Besoins du QC</span>
             <h2 class="text-2xl font-black text-slate-800 mb-6">魁北克本地加分？</h2>
             <div class="space-y-4">
-                <div><label class="input-label">魁省本地学历 (14档对标) </label>
+                <div><label class="input-label">魁省本地学历 (14档全量对标)</label>
                 <select id="q1" class="select-ui calc-single">
                     <option value="200">本地博士/医疗专家 (200)</option><option value="180">本地硕士 2年+ (180)</option><option value="170">本地硕士 1年 / 本科 5年+ (170)</option>
-                    <option value="160">本地本科 3-4年 (160)</option><option value="120">技术大专 3年 / 本科 1年 (120)</option><option value="80">技术大专 900h+ (80)</option>
-                    <option value="40">本地职业培训 DEP 900h+ (40)</option><option value="0">无本地学历</option>
+                    <option value="160">本地本科 3-4年 (160)</option><option value="140">本地本科 2年 (140)</option><option value="120">技术大专 3年 / 本科 1年 (120)</option>
+                    <option value="80">技术大专 (Technique) 900h+ (80)</option><option value="60">普通大专 (Général) 2年 (60)</option><option value="40">职业培训 DEP 900h+ (40)</option><option value="20">普通高中 / DEP 600h+ (20)</option><option value="0">无本地学历</option>
                 </select></div>
-                <div><label class="input-label">本地经验与职业诊断 [cite: 76, 87]</label>
+                <div><label class="input-label">职业诊断与紧缺度</label>
                 <select id="q2" class="select-ui calc-single">
-                    <option value="120">本地极度紧缺职业 + 48m+</option><option value="160">本地通用经验 + 48m+</option>
-                    <option value="80">本地通用经验 + 24m+</option><option value="0">无本地经验</option>
+                    <option value="120">极度紧缺 (Déficit) + 48m+</option>
+                    <option value="100">轻度紧缺 (Léger) + 48m+</option>
+                    <option value="90">极度紧缺 + 12-23m</option>
+                    <option value="25">平衡职业 + 48m+</option>
+                    <option value="0">无对应经验</option>
                 </select></div>
                 <div class="grid grid-cols-2 gap-2">
-                    <select id="vjo" class="select-ui calc-single"><option value="50">VJO: CMM外 [cite: 103]</option><option value="30">VJO: CMM内 [cite: 103]</option><option value="0">无 VJO</option></select>
-                    <select id="arm" class="select-ui calc-single"><option value="50">执业许可证 [cite: 105]</option><option value="0">无认证</option></select>
+                    <select id="vjo" class="select-ui calc-single"><option value="50">VJO: CMM外</option><option value="30">VJO: CMM内</option><option value="0">无 VJO</option></select>
+                    <select id="arm" class="select-ui calc-single"><option value="50">执业许可证 (ARM)</option><option value="0">无</option></select>
                 </div>
             </div>
             <button onclick="nextStep()" class="btn-primary mt-10">下一步</button>
@@ -126,11 +135,11 @@
 
         <div id="step-5" class="step-container" data-name="地域加分">
             <span class="category-tag bg-cyan-100 text-cyan-600">Séjours hors CMM</span>
-            <h2 class="text-2xl font-black text-slate-800 mb-6">CMM 以外停留 (累加)？</h2>
+            <h2 class="text-2xl font-black text-slate-800 mb-6">CMM 以外停留 (可累加)？</h2>
             <div class="space-y-4">
-                <div><label class="input-label">居住时长 (Max 40) [cite: 94]</label><select id="h1" class="select-ui calc-single"><option value="40">48个月+ (40)</option><option value="16">12-23个月 (16)</option><option value="0">无</option></select></div>
-                <div><label class="input-label">工作时长 (Max 60) [cite: 96]</label><select id="h2" class="select-ui calc-single"><option value="60">48个月+ (60)</option><option value="24">12-23个月 (24)</option><option value="0">无</option></select></div>
-                <div><label class="input-label">学习时长 (Max 20) [cite: 99]</label><select id="h3" class="select-ui calc-single"><option value="20">48个月+ (20)</option><option value="8">12-23个月 (8)</option><option value="0">无</option></select></div>
+                <div><label class="input-label">居住时长 (Max 40)</label><select id="h1" class="select-ui calc-single"><option value="40">48个月+ (40)</option><option value="16">12-23个月 (16)</option><option value="0">无</option></select></div>
+                <div><label class="input-label">工作时长 (Max 60)</label><select id="h2" class="select-ui calc-single"><option value="60">48个月+ (60)</option><option value="24">12-23个月 (24)</option><option value="0">无</option></select></div>
+                <div><label class="input-label">学习时长 (Max 20)</label><select id="h3" class="select-ui calc-single"><option value="20">48个月+ (20)</option><option value="8">12-23个月 (8)</option><option value="0">无</option></select></div>
             </div>
             <button onclick="nextStep()" class="btn-primary mt-8">下一步</button>
         </div>
@@ -139,25 +148,23 @@
             <span class="category-tag bg-blue-100 text-blue-600">Adaptation</span>
             <h2 class="text-2xl font-black text-slate-800 mb-6">其他适应能力？</h2>
             <div class="space-y-4">
-                <div><label class="input-label">魁省在读无文凭学习 [cite: 115]</label><select id="s1" class="select-ui calc-single"><option value="30">在读: 48个月+ (30)</option><option value="10">已完成: 48个月+ (10)</option><option value="0">无</option></select></div>
-                <div><label class="input-label">魁省亲属加分 [cite: 121]</label><select id="s2" class="select-ui calc-single"><option value="10">主申亲属 (10)</option><option value="5">配偶亲属 (5)</option><option value="0">无</option></select></div>
+                <div><label class="input-label">魁省在读/无文凭学习</label><select id="s1" class="select-ui calc-single"><option value="30">正在进行: 48个月+ (30)</option><option value="10">已完成: 48个月+ (10)</option><option value="0">无</option></select></div>
+                <div><label class="input-label">魁省亲属加分</label><select id="s2" class="select-ui calc-single"><option value="10">主申亲属在大区外 (10)</option><option value="5">配偶亲属 (5)</option><option value="0">无</option></select></div>
             </div>
             <button onclick="nextStep()" class="btn-primary mt-10">下一步</button>
         </div>
 
         <div id="step-7" class="step-container sp-step" data-name="配偶评估">
             <span class="category-tag bg-pink-100 text-pink-600">Conjoint</span>
-            <h2 class="text-2xl font-black text-slate-800 mb-6">随行配偶背景？</h2>
+            <h2 class="text-2xl font-black text-slate-800 mb-6">随行配偶评估？</h2>
             <div class="space-y-4">
                 <div class="grid grid-cols-2 gap-2">
-                    <div><label class="input-label">配偶听/口 [cite: 125, 126]</label><select id="sf1" class="select-ui sp-calc"><option value="20">N9+ (20分)</option><option value="8">N4 (8分)</option><option value="0">无</option></select></div>
-                    <div><label class="input-label">配偶读/写 [cite: 127, 128]</label><select id="sf2" class="select-ui sp-calc"><option value="20">N9+ (20分)</option><option value="8">N4 (8分)</option><option value="0">无</option></select></div>
+                    <div><label class="input-label">配偶听/口</label><select id="sf1" class="select-ui sp-calc"><option value="20">N9+ (20分)</option><option value="16">N7-8 (16分)</option><option value="8">N4-6 (8分)</option><option value="0">无</option></select></div>
+                    <div><label class="input-label">配偶读/写</label><select id="sf2" class="select-ui sp-calc"><option value="20">N9+ (20分)</option><option value="16">N7-8 (16分)</option><option value="8">N4-6 (8分)</option><option value="0">无</option></select></div>
                 </div>
-                <div class="grid grid-cols-2 gap-2">
-                    <div><label class="input-label">配偶年龄 [cite: 133]</label><select id="sa1" class="select-ui sp-calc"><option value="20">20-30岁 (20)</option><option value="14">35岁 (14)</option><option value="0">45岁+</option></select></div>
-                    <div><label class="input-label">配偶学历 [cite: 146]</label><select id="se1" class="select-ui sp-calc"><option value="20">硕士/博士 (20)</option><option value="16">本科 (16)</option><option value="0">高中下</option></select></div>
-                </div>
-                <div><label class="input-label">配偶本地经验/文凭 [cite: 139, 151]</label><select id="sq1" class="select-ui sp-calc"><option value="60">本地工作+文凭 (60)</option><option value="30">本地工作 48m+ (30)</option><option value="0">无</option></select></div>
+                <div><label class="input-label">配偶年龄 (18档全量)</label><select id="sa1" class="select-ui sp-calc"><option value="20">20-30岁 (20)</option><option value="18">31岁 (18)</option><option value="14">35岁 (14)</option><option value="6">40岁 (6)</option><option value="2">44岁 (2)</option><option value="0">45岁+</option></select></div>
+                <div><label class="input-label">配偶学历 (15档全量)</label><select id="se1" class="select-ui sp-calc"><option value="20">博士/硕士 2年+ (20)</option><option value="16">大学本科 3-4年 (16)</option><option value="12">技术大专 3年 (12)</option><option value="4">DEP 900h+ (4)</option><option value="0">高中下</option></select></div>
+                <div><label class="input-label">配偶本地贡献</label><select id="sq1" class="select-ui sp-calc"><option value="60">本地工作+文凭 (60)</option><option value="30">本地文凭 (30)</option><option value="30">本地经验 (30)</option><option value="0">无</option></select></div>
             </div>
             <button onclick="nextStep()" class="btn-primary mt-8">查看最终得分</button>
         </div>
@@ -166,7 +173,8 @@
             <div class="text-7xl font-black text-blue-600 mb-4 tracking-tighter" id="final-score">0</div>
             <p class="text-slate-400 text-xs font-black uppercase tracking-widest mb-10">Total Points / 1400</p>
             <div class="glass-card p-8 text-left text-[10px] text-slate-500 italic leading-relaxed">
-                依据 2026.04.15 官方评分手册精算。已包含双轨压缩算法、配偶补偿、地域停留史三重累加及 14 档本地学历对标。 [cite: 1-153]
+                测算逻辑：$$总分 = 主申硬加分(压缩) + 需求加分 + 适应加分$$
+                本工具已严格对标官方 PDF，包含年龄 (17档)、主申学历 (16档)、本地学历 (14档) 及地域史 (3类累加)。
             </div>
             <button onclick="location.reload()" class="mt-10 btn-primary bg-slate-900">重新开始测算</button>
         </div>
@@ -213,11 +221,11 @@
         function calc() {
             const isM = document.getElementById('marital').value === 'married';
             const vIdx = isM ? 1 : 0; let total = 0;
-            // 主申双轨项 (520)
+            // 1. 人力资本双轨项
             document.querySelectorAll('.calc-item').forEach(el => { total += parseInt(el.value.split(',')[vIdx]) || 0; });
-            // 主申需求项 (700)
+            // 2. 魁省需求单向项
             document.querySelectorAll('.calc-single').forEach(el => { total += parseInt(el.value) || 0; });
-            // 适应因子/配偶项 (180)
+            // 3. 配偶/适应贡献项
             if (isM) document.querySelectorAll('.sp-calc').forEach(el => { total += parseInt(el.value) || 0; });
             
             let cur = 0; const t = setInterval(() => {
